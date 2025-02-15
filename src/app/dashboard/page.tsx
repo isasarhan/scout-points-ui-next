@@ -1,12 +1,11 @@
+import DashboardModule from '@/modules/dashboard';
 import React, { FC } from 'react';
-export interface DashboardPageProps {
-  height: number;
-}
+
+export interface DashboardPageProps {}
+
 const DashboardPage: FC<DashboardPageProps> = () => {
   return (
-    <div>
-      Hello DashboardPage
-    </div>
+    <DashboardModule/>
   );
 };
 
