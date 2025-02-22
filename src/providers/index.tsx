@@ -2,6 +2,7 @@
 import React, { ReactNode } from 'react'
 import UserProvider from './UserProvider'
 import { Toaster } from "@/components/ui/sonner"
+import { ThemeProvider } from './ThemeProvider'
 
 interface ProvidersProps {
     children: ReactNode
@@ -10,12 +11,14 @@ interface ProvidersProps {
 const Providers: React.FC<ProvidersProps> = ({ children }) => {
     return (
         <UserProvider>
-            {children}
-            <Toaster toastOptions={{
-                classNames: {
-                    error: ''
-                },
-            }} />
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+                {children}
+                <Toaster toastOptions={{
+                    classNames: {
+                        error: ''
+                    },
+                }} />
+            </ThemeProvider>
         </UserProvider>
     )
 }
