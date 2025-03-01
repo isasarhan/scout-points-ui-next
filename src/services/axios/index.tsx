@@ -10,7 +10,7 @@ class HttpService {
             timeoutErrorMessage: "Time out !",
         });
         this.instance.interceptors.request.use(config => {
-            const token = Cookies.get('token')
+            const token = Cookies.get('token')            
             if (token) {
                 config.headers.Authorization = `Bearer ${token}`;
             }

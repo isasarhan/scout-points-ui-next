@@ -18,6 +18,7 @@ export interface IUser {
     address?: Address;
     nationality?: string;
     points?: number;
+    profileUrl?: number;
     department?: string;
     role?: Role
 }

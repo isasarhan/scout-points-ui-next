@@ -1,3 +1,4 @@
+'use client'
 import * as React from "react"
 import { GalleryVerticalEnd } from "lucide-react"
 
@@ -14,28 +15,31 @@ import {
   SidebarMenuSubItem,
   SidebarRail,
 } from "@/components/ui/sidebar"
+import { usePathname } from "next/navigation"
 
-const data = {
-  navMain: [
-    {
-      title: "Getting Started",
-      url: "#",
-      items: [
-        {
-          title: "Installation",
-          url: "#",
-        },
-        {
-          title: "Project Structure",
-          url: "#",
-          isActive:true
-        },
-      ],
-    },
-  ],
-}
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const pathName = usePathname()
+  const data = {
+    navMain: [
+      {
+        title: "Users",
+        url: "#",
+        items: [
+          {
+            title: "All Users",
+            url: "/dashboard/admin/users",
+            isActive: pathName === "/dashboard/admin/users"
+          },
+          {
+            title: "Project Structure",
+            url: "#",
+          },
+        ],
+      },
+    ],
+  }
+  
   return (
     <Sidebar {...props}>
       <SidebarHeader>

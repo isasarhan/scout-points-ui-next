@@ -20,9 +20,7 @@ const LoginModule: FC<LoginModuleProps> = () => {
     const { handleSubmit } = form
     const onSubmit = async (data: { email: string, password: string }) => {
         const { email, password } = data
-        const result = await signIn(email, password)
-        console.log(result);
-
+        await signIn(email, password)
     }
     return (
         <Card>
@@ -41,16 +39,16 @@ const LoginModule: FC<LoginModuleProps> = () => {
                                 defaultValue=''
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Username</FormLabel>
+                                        <FormLabel>Email</FormLabel>
                                         <FormControl>
-                                            <Input placeholder="shadcn" {...field} />
+                                            <Input placeholder="enter your email" {...field} />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
                                 )}
                             />
                         </div>
-                        <div className="space-y-2">
+                        <div className="space-y-2 mt-2">
                             <FormField
                                 control={form.control}
                                 name="password"
@@ -59,7 +57,7 @@ const LoginModule: FC<LoginModuleProps> = () => {
                                     <FormItem>
                                         <FormLabel>Password</FormLabel>
                                         <FormControl>
-                                            <Input placeholder="shadcn" {...field} />
+                                            <Input placeholder="enter your password" {...field} />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
