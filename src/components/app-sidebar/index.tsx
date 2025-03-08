@@ -16,29 +16,12 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar"
 import { usePathname } from "next/navigation"
+import { generateSidebar } from "./data"
 
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathName = usePathname()
-  const data = {
-    navMain: [
-      {
-        title: "Users",
-        url: "#",
-        items: [
-          {
-            title: "All Users",
-            url: "/dashboard/admin/users",
-            isActive: pathName === "/dashboard/admin/users"
-          },
-          {
-            title: "Project Structure",
-            url: "#",
-          },
-        ],
-      },
-    ],
-  }
+  const data = generateSidebar(pathName)
   
   return (
     <Sidebar {...props}>

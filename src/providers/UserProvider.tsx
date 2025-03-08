@@ -5,6 +5,7 @@ import Cookies from 'js-cookie';
 import { IUser, Role } from '@/types/user';
 import { toast } from "sonner"
 import { FailedCircleIcon, SuccessCircleIcon } from '@/assets/icons';
+import { useRouter } from 'next/navigation';
 
 interface UserProviderProps {
     children: ReactNode
@@ -34,6 +35,7 @@ const UserProvider: FC<UserProviderProps> = ({ children }) => {
     const [token, setToken] = useState('')
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const { login } = useAuth()
+    const router = useRouter()
 
     const signIn = async (email: string, password: string) => {
         return await login(email, password ).then((data) => {
@@ -43,6 +45,7 @@ const UserProvider: FC<UserProviderProps> = ({ children }) => {
             setToken(token)
             Cookies.set('token', token)
             Cookies.set('currentUser', JSON.stringify(user))
+            router.push('/dashboard')
             return data
         }).catch((e)=>{
             toast.error("Failed to login", { icon: <FailedCircleIcon fill='red' className='w-4 h-4' /> })

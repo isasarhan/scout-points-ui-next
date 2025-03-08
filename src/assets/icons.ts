@@ -1,6 +1,5 @@
 import { FaCircleCheck, FaCircleXmark } from "react-icons/fa6";
-import { FaEye, FaEnvelope, FaUser } from "react-icons/fa6";
-import { FaPhone } from "react-icons/fa6";
+import { FaEye, FaEnvelope, FaUser, FaPhone } from "react-icons/fa6";
 import { FaRoad, FaBuilding, FaHashtag ,FaLocationDot, FaGlobe    } from "react-icons/fa6";
 
 export const SuccessCircleIcon = FaCircleCheck

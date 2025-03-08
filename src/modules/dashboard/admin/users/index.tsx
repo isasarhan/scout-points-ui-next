@@ -1,5 +1,6 @@
 import { ViewIcon } from '@/assets/icons';
 import Table, { Column } from '@/common/table';
+import { Card } from '@/components/ui/card';
 import { IUser } from '@/types/user';
 import Link from 'next/link';
 import React, { FC } from 'react';
@@ -30,17 +31,19 @@ const UsersModule: FC<UsersModuleProps> = ({ users=[] }) => {
             value: 'department'
         },
         {
-            label: 'View More Info',
+            label: 'View More',
             value: '_id',
             render: (value)=>(
-                <Link href={`/dashboard/admin/users/${value}`}><ViewIcon /> </Link>
+                <div className=''>
+                    <Link href={`/dashboard/admin/users/${value}`}><ViewIcon size={20}/> </Link>
+                </div>
             )
         },
     ]
     return (
-        <>
+        <Card className='p-4'>
             <Table data={users} column={ column} />
-        </>
+        </Card>
     );
 };
 

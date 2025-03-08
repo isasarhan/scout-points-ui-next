@@ -8,13 +8,14 @@ export interface Column {
 }
 
 export interface TablePropsComp {
-    column: Column[];
+    caption?: string
+    column: Column[]
     data: any[]
 }
-const TableComp: FC<TablePropsComp> = ({ data, column }) => {
+const TableComp: FC<TablePropsComp> = ({ data, column, caption }) => {
     return (
         <Table>
-            <TableCaption>A list of your recent invoices.</TableCaption>
+            {caption && <TableCaption>{caption}</TableCaption>}
             <TableHeader>
                 <TableRow>
                     {column.map((col) => (
@@ -24,10 +25,10 @@ const TableComp: FC<TablePropsComp> = ({ data, column }) => {
             </TableHeader>
             <TableBody>
                 {
-                    data.map((v) => (
-                        <TableRow>
-                            {column.map((col) => (
-                                <TableCell>{col.render ? col.render(v[col.value]) : v[col.value]}</TableCell>
+                    data.map((v, index) => (
+                        <TableRow className='p-4' key={`table-index-${index}`}>
+                            {column.map((col, colIndx) => (
+                                <TableCell className='p-5' key={`table-col-index-${colIndx}`}>{col.render ? col.render(v[col.value]) : v[col.value]}</TableCell>
                             ))}
                         </TableRow>
                     ))

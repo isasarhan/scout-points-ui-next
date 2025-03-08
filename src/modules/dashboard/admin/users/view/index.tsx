@@ -80,7 +80,7 @@ const ViewUserModule: FC<ViewUserModuleProps> = ({ user }) => {
                 </Card>
             </div>
             <pre>
-                points and acheivementsa
+                
             </pre>
 
         </div>
