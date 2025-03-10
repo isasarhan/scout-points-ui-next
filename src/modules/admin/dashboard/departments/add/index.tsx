@@ -2,7 +2,6 @@
 import useDepartments from '@/services/departments';
 import React, { FC } from 'react';
 export interface AddDepartmentModuleProps { }
-import Cookies from 'js-cookie';
 import { useUserContext } from '@/providers/UserProvider';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { useForm } from 'react-hook-form';

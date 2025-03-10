@@ -1,24 +1,25 @@
 export enum EnumDepartmentType {
-    SCOUT = 'scout'
+  SCOUT = "scout",
 }
 export enum EnumDepartmentStatus {
-    ACTIVE = 'active',
-    ARCHIVED = 'archived'
+  ACTIVE = "active",
+  ARCHIVED = "archived",
 }
 export interface ILocation {
-    city: string;
-    country: string;
-    postalCode: string;
-    street: string;
+  city: string;
+  country: string;
+  postalCode: string;
+  street: string;
 }
 
 export interface IDepartment {
-    name: string;
-    location: ILocation;
-    type: EnumDepartmentType;
-    status: EnumDepartmentStatus;
-    createdAt: Date;
-    updatedAt: Date;
-    description: string;
-    manager?: string;
+  _id: string;
+  name: string;
+  location: ILocation;
+  type: EnumDepartmentType;
+  status: EnumDepartmentStatus;
+  createdAt: Date;
+  updatedAt: Date;
+  description: string;
+  manager?: string;
 }

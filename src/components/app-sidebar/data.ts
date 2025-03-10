@@ -6,13 +6,13 @@ export const generateSidebar = (pathName: string) => {
                 url: "#",
                 items: [
                     {
-                        title: "All Users",
-                        url: "/dashboard/admin/users",
-                        isActive: pathName === "/dashboard/admin/users"
+                        title: "View All",
+                        url: "/admin/dashboard/users",
+                        isActive: pathName === "/admin/dashboard/users"
                     },
                     {
-                        title: "Project Structure",
-                        url: "#",
+                        title: "Add New",
+                        url: "/admin/dashboard/users/add",
                     },
                 ],
             },
@@ -22,8 +22,8 @@ export const generateSidebar = (pathName: string) => {
                 items: [
                     {
                         title: "All Users",
-                        url: "/dashboard/admin/users",
-                        isActive: pathName === "/dashboard/admin/users"
+                        url: "/admin/dashboard/achievements",
+                        isActive: pathName === "/admin/dashboard/users"
                     },
                     {
                         title: "Project Structure",
@@ -37,12 +37,12 @@ export const generateSidebar = (pathName: string) => {
                 items: [
                     {
                         title: "View All",
-                        url: "/dashboard/admin/departments",
-                        isActive: pathName === "/dashboard/admin/departments"
+                        url: "/admin/dashboard/departments",
+                        isActive: pathName === "/admin/dashboard/departments"
                     },
                     {
-                        title: "Add",
-                        url: "/dashboard/admin/departments/add",
+                        title: "Add New",
+                        url: "/admin/dashboard/departments/add",
                     },
                 ],
             },

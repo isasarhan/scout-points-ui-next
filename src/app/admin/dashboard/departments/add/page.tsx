@@ -1,4 +1,4 @@
-import AddDepartmentModule from '@/modules/dashboard/admin/departments/add';
+import AddDepartmentModule from '@/modules/admin/dashboard/departments/add';
 import React, { FC } from 'react';
 
 export interface AddDepartmentPageProps {}

@@ -17,8 +17,13 @@ const useUsers = ({ token }: { token: string | undefined }) => {
             return res.data
         }).catch((e) => console.log(e)) : null
     };
-
-    return { getById, getAll };
+    const add = async (user: IUser) => {
+        if (!token) return
+        return httpService.assignToken(token) ? await instance.post(`${url}/add`, user).then((res) => {
+            return res.data
+        }).catch((e) => console.log(e)) : null
+    };
+    return { getById, getAll, add };
 }
 
 export default useUsers;

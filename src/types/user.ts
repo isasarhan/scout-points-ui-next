@@ -15,11 +15,11 @@ export interface IUser {
     motherName?: string;
     email: string;
     password: string;
-    phone: string;
+    phone?: string;
     address?: Address;
     nationality?: string;
     points?: number;
-    profileUrl?: number;
+    profileUrl?: string;
     department?: string;
     role?: Role
 }

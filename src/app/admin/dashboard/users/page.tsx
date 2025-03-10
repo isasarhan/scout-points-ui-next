@@ -1,4 +1,4 @@
-import UsersModule from "@/modules/dashboard/admin/users";
+import UsersModule from "@/modules/admin/dashboard/users";
 import useUsers from "@/services/users";
 import { cookies } from "next/headers";
 

@@ -1,4 +1,4 @@
-import DashboardModule from '@/modules/dashboard';
+import DashboardModule from '@/modules/admin';
 import React, { FC } from 'react';
 
 export interface DashboardPageProps {}

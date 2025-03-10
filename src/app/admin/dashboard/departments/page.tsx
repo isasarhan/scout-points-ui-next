@@ -1,4 +1,4 @@
-import AllDepartmentsModule from '@/modules/dashboard/admin/departments';
+import AllDepartmentsModule from '@/modules/admin/dashboard/departments';
 import useDepartments from '@/services/departments';
 import { cookies } from 'next/headers';
 import React, { FC } from 'react';

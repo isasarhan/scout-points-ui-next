@@ -1,4 +1,4 @@
-import ViewUserModule from '@/modules/dashboard/admin/users/view';
+import ViewUserModule from '@/modules/admin/dashboard/users/view';
 import useUsers from '@/services/users';
 import { cookies } from 'next/headers';
 import React, { FC } from 'react';

@@ -45,7 +45,7 @@ const UserProvider: FC<UserProviderProps> = ({ children }) => {
             setToken(token)
             Cookies.set('token', token)
             Cookies.set('currentUser', JSON.stringify(user))
-            router.push('/dashboard')
+            router.push('/admin/dashboard')
             return data
         }).catch((e)=>{
             toast.error("Failed to login", { icon: <FailedCircleIcon fill='red' className='w-4 h-4' /> })
