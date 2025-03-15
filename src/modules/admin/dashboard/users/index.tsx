@@ -28,21 +28,26 @@ const UsersModule: FC<UsersModuleProps> = ({ users=[] }) => {
         },
         {
             label: 'Department',
-            value: 'department'
+            value: 'department',
+            render: (value)=>(
+                <div className=''>
+                    {value.name}
+                </div>
+            )
         },
         {
             label: 'View More',
             value: '_id',
             render: (value)=>(
                 <div className=''>
-                    <Link href={`/dashboard/admin/users/${value}`}><ViewIcon size={20}/> </Link>
+                    <Link href={`/admin/dashboard/users/${value}`}><ViewIcon size={20}/> </Link>
                 </div>
             )
         },
     ]
     return (
         <Card className='p-4'>
-            <Table data={users} column={ column} />
+            <Table data={users} column={column} />
         </Card>
     );
 };

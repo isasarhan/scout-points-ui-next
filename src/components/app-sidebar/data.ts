@@ -17,21 +17,6 @@ export const generateSidebar = (pathName: string) => {
                 ],
             },
             {
-                title: "Achievements",
-                url: "#",
-                items: [
-                    {
-                        title: "All Users",
-                        url: "/admin/dashboard/achievements",
-                        isActive: pathName === "/admin/dashboard/users"
-                    },
-                    {
-                        title: "Project Structure",
-                        url: "#",
-                    },
-                ],
-            },
-            {
                 title: "Departments",
                 url: "#",
                 items: [

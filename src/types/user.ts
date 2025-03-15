@@ -1,3 +1,4 @@
+import { IDepartment } from "./department";
 
 interface Address {
     street: string;
@@ -7,6 +8,22 @@ interface Address {
     city: string;
 }
 
+export interface IAddUser {
+    _id?:string
+    firstName: string;
+    lastName: string;
+    fatherName: string;
+    motherName?: string;
+    email: string;
+    password: string;
+    phone?: string;
+    address?: Address;
+    nationality?: string;
+    points?: number;
+    profileUrl?: string;
+    department?: string
+    role?: Role
+}
 export interface IUser {
     _id?:string
     firstName: string;
@@ -20,7 +37,7 @@ export interface IUser {
     nationality?: string;
     points?: number;
     profileUrl?: string;
-    department?: string;
+    department?: Partial<IDepartment>
     role?: Role
 }
 

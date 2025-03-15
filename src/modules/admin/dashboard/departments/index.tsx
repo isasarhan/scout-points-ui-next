@@ -38,7 +38,7 @@ const AllDepartmentsModule: FC<AllDepartmentsModuleProps> = ({ departments }) =>
             value: '_id',
             render: (value) => (
                 <div className=''>
-                    <Link href={`/dashboard/admin/users/${value}`}><ViewIcon size={20} /> </Link>
+                    <Link href={`/admin/dashboard/users/${value}`}><ViewIcon size={20} /> </Link>
                 </div>
             )
         },

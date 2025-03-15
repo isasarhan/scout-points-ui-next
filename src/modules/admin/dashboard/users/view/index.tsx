@@ -71,7 +71,7 @@ const ViewUserModule: FC<ViewUserModuleProps> = ({ user }) => {
                             </div>
                             <div className='flex justify-between p-3 rounded-xl'>
                                 <div className='w-1/4'>Department:</div>
-                                <div className='w-3/4 text-center'>{user.department}</div>
+                                <div className='w-3/4 text-center'>{user?.department?.name}</div>
                             </div>
                         </CardDescription>
                     </CardContent>

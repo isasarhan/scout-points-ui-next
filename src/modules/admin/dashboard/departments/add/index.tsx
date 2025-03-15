@@ -197,19 +197,6 @@ const AddDepartmentModule: FC<AddDepartmentModuleProps> = () => {
                                 )}
                             />
                         </div>
-                        <FormField
-                            control={form.control}
-                            name="manager"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Manager ID</FormLabel>
-                                    <FormControl>
-                                        <Input placeholder="Enter manager ID (optional)" {...field} />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
                     </CardContent>
                     <CardFooter>
                         <Button type="submit" className='px-9 '>

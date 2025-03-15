@@ -56,6 +56,7 @@ const UserProvider: FC<UserProviderProps> = ({ children }) => {
         Cookies.remove('currentUser')
         setIsLoggedIn(false);
         setToken('')
+        router.refresh()
         setUser({ firstName: '', lastName: '', email: '', fatherName: '', password: '', role: Role.ADMIN, phone: '' })
         return
     }

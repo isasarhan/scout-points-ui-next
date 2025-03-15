@@ -17,12 +17,14 @@ import {
 } from "@/components/ui/sidebar"
 import { usePathname } from "next/navigation"
 import { generateSidebar } from "./data"
+import { Button } from "../ui/button"
+import { useUserContext } from "@/providers/UserProvider"
 
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathName = usePathname()
   const data = generateSidebar(pathName)
-  
+  const {signOut} = useUserContext()
   return (
     <Sidebar {...props}>
       <SidebarHeader>
@@ -69,6 +71,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarGroup>
       </SidebarContent>
       <SidebarRail />
+      <Button className="m-4" onClick={()=>signOut()}>LOGOUT</Button>
     </Sidebar>
   )
 }
