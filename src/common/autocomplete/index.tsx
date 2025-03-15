@@ -28,8 +28,8 @@ interface Option {
 export interface AutocompleteProps {
   options: Option[];
   placeholder?: string;
-  value?: string; // Receive value from react-hook-form
-  onChange?: (value: string) => void; // Call onChange from react-hook-form
+  value?: string; 
+  onChange?: (value: string) => void; 
   register?: UseFormRegisterReturn;
 }
 

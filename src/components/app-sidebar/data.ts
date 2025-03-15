@@ -6,13 +6,14 @@ export const generateSidebar = (pathName: string) => {
                 url: "#",
                 items: [
                     {
-                        title: "View All",
+                        title: "All Users",
                         url: "/admin/dashboard/users",
                         isActive: pathName === "/admin/dashboard/users"
                     },
                     {
-                        title: "Add New",
+                        title: "Add New User",
                         url: "/admin/dashboard/users/add",
+                        isActive: pathName ===  "/admin/dashboard/users/add"
                     },
                 ],
             },
@@ -21,14 +22,36 @@ export const generateSidebar = (pathName: string) => {
                 url: "#",
                 items: [
                     {
-                        title: "View All",
+                        title: "All Departments",
                         url: "/admin/dashboard/departments",
                         isActive: pathName === "/admin/dashboard/departments"
                     },
                     {
-                        title: "Add New",
+                        title: "Add New Department",
                         url: "/admin/dashboard/departments/add",
+                        isActive: pathName ===  "/admin/dashboard/departments/add"
                     },
+                ],
+            },
+            {
+                title: "Achievements",
+                url: "#",
+                items: [
+                    {
+                        title: "All Achievements",
+                        url: "/admin/dashboard/achievements",
+                        isActive: pathName === "/admin/dashboard/achievements"
+                    },
+                    {
+                        title: "Add New Achievement",
+                        url: "/admin/dashboard/achievements/add",
+                        isActive: pathName === "/admin/dashboard/achievements/add"
+                    },
+                    {
+                        title: "Categories",
+                        url: "/admin/dashboard/achievements/categories",
+                        isActive: pathName === "/admin/dashboard/achievements/categories"
+                    }
                 ],
             },
         ],

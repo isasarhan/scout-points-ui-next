@@ -8,7 +8,6 @@ export interface UsersModuleProps {
     users: IUser[];
 }
 const UsersModule: FC<UsersModuleProps> = ({ users=[] }) => {
-    // const router = use
     const column: Column[] = [
         {
             label: 'First Name',
