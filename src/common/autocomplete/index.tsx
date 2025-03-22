@@ -26,7 +26,7 @@ interface Option {
 }
 
 export interface AutocompleteProps {
-  options: Option[];
+  options: any[];
   placeholder?: string;
   value?: string; 
   onChange?: (value: string) => void; 
@@ -65,12 +65,12 @@ const Autocomplete: FC<AutocompleteProps> = ({
               {options.map((option) => (
                 <CommandItem
                   key={option.value}
-                  value={option.value}
+                  value={option.value || option._id}
                   onSelect={() => {
                     onChange?.(option.value)
                     setOpen(false);
                   }}>
-                  {option.label}
+                  {option.label || option.name}
                   <Check
                     className={cn(
                       "ml-auto",

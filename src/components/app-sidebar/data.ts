@@ -15,6 +15,11 @@ export const generateSidebar = (pathName: string) => {
                         url: "/admin/dashboard/users/add",
                         isActive: pathName ===  "/admin/dashboard/users/add"
                     },
+                    {
+                        title: "Take Attendence",
+                        url: "/admin/dashboard/users/attendence",
+                        isActive: pathName ===  "/admin/dashboard/users/add"
+                    },
                 ],
             },
             {

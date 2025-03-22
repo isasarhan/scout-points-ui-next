@@ -1,13 +1,13 @@
 import { z } from "zod";
-import { ObjectId } from "mongoose";
 
 export const AddAchievementSchema = z.object({
     title: z.string().min(1, "Title is required"),
-    description: z.string().optional(),
-    deadline: z.date().optional(),
+    description: z.string(),
+    points: z.string(),
+    deadline: z.string().optional(),
     categories: z.array(z.string()).min(1, "At least one category is required"),
     awardedBy: z.string().optional(),
-    department: z.array(z.string()).min(1, "At least one department is required"),
+    departments: z.array(z.string()).min(1, "At least one department is required"),
     attachments: z.array(z.string()).optional(),
 });
 

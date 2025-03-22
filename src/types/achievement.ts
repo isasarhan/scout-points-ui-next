@@ -2,11 +2,10 @@ export interface IAchievement {
     _id?: string
     title: string;
     description: string;
-    deadline?: Date;
+    deadline?: string;
     categories: string[];
     awardedBy?: string;
-    department: string[];
+    departments: string[];
     attachments?: string[];
     points: number
-
 }

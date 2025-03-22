@@ -16,7 +16,7 @@ import {
 import { FC } from 'react';
 import { UseFormRegisterReturn } from "react-hook-form"
 export interface DatePickerProps {
-    value?: Date;
+    value?: string;
     onChange?: (value: string) => void;
     register?: UseFormRegisterReturn;
 }

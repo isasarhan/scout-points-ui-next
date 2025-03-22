@@ -12,7 +12,7 @@ const AchievementsCategoriesPage: FC<AchievementsCategoriesPageProps> = async ()
     const data = await getAll();    
 
     return (
-        <AchievementsCategoriesModule achievements={data}/>
+        <AchievementsCategoriesModule categories={data}/>
     );
 };
 

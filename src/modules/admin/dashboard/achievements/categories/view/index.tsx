@@ -7,9 +7,9 @@ import React, { FC } from 'react';
 import AddAchievementsCategoriesModule from '../add';
 
 export interface AchievementsCategoriesModuleProps {
-    achievements: IAchievemntCategory[]
+    categories: IAchievemntCategory[]
 }
-const AchievementsCategoriesModule: FC<AchievementsCategoriesModuleProps> = ({ achievements }) => {
+const AchievementsCategoriesModule: FC<AchievementsCategoriesModuleProps> = ({ categories }) => {
     const column: Column[] = [
         {
             label: 'Name',
@@ -29,7 +29,7 @@ const AchievementsCategoriesModule: FC<AchievementsCategoriesModuleProps> = ({ a
             </div>
             <div className="flex-1">
                 <Card className='p-4  h-1/2 overflow-y-scroll'>
-                    <Table data={achievements} column={column} />
+                    <Table data={categories} column={column} />
                 </Card>
             </div>
         </div>
