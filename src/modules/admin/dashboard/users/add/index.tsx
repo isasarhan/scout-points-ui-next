@@ -198,31 +198,25 @@ const AddUserModule: FC<AddUserModuleProps> = ({ departments }) => {
                                     <FormItem>
                                         <FormLabel>Role</FormLabel>
                                         <FormControl>
-                                            <Select
-                                                onValueChange={field.onChange}
-                                                defaultValue={field.value}>
+                                            <Select onValueChange={field.onChange} defaultValue={field.value}>
                                                 <FormControl>
                                                     <SelectTrigger>
-                                                        <SelectValue placeholder="Select Status" />
+                                                        <SelectValue placeholder="Select Role" />
                                                     </SelectTrigger>
                                                 </FormControl>
                                                 <SelectContent>
-                                                    <SelectItem value={Role.ADMIN}>
-                                                        {Role.ADMIN}
-                                                    </SelectItem>
-                                                    <SelectItem value={Role.MANAGER}>
-                                                        {Role.MANAGER}
-                                                    </SelectItem>
-                                                    <SelectItem value={Role.MODERATOR}>
-                                                        {Role.MODERATOR}
-                                                    </SelectItem>
-                                                    <SelectItem value={Role.USER}>{Role.USER}</SelectItem>
+                                                    {Object.values(Role).map((role) => (
+                                                        <SelectItem key={role} value={role}>
+                                                            {role}
+                                                        </SelectItem>
+                                                    ))}
                                                 </SelectContent>
                                             </Select>
                                         </FormControl>
                                     </FormItem>
                                 )}
                             />
+
                             <FormField
                                 control={form.control}
                                 name="department"

@@ -20,21 +20,6 @@ type Attendee = {
     lastUpdated: string
 }
 
-
-/** 
- * activity{
- *  startDate
- *  endDate if not provided then equal to startDate
- *  attendee [
- *  {
- *      user
- *      attendence time
- *      status : "present" | "absent" | "late"
- * }
- * ]
- * }
- * 
- * **/
 export default function AttendenceModule({ users }: { users: IUser[] }) {
     const [attendees, setAttendees] = useState<Attendee[]>([])
     const [searchQuery, setSearchQuery] = useState("")

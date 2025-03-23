@@ -13,12 +13,29 @@ export const generateSidebar = (pathName: string) => {
                     {
                         title: "Add New User",
                         url: "/admin/dashboard/users/add",
-                        isActive: pathName ===  "/admin/dashboard/users/add"
+                        isActive: pathName === "/admin/dashboard/users/add"
+                    },
+
+                ],
+            },
+            {
+                title: "Events",
+                url: "#",
+                items: [
+                    {
+                        title: "All Events",
+                        url: "/admin/dashboard/events",
+                        isActive: pathName === "/admin/dashboard/events"
+                    },
+                    {
+                        title: "Add New Event",
+                        url: "/admin/dashboard/events/add",
+                        isActive: pathName === "/admin/dashboard/events/add"
                     },
                     {
                         title: "Take Attendence",
-                        url: "/admin/dashboard/users/attendence",
-                        isActive: pathName ===  "/admin/dashboard/users/add"
+                        url: "/admin/dashboard/events/attendence",
+                        isActive: pathName === "/admin/dashboard/events/attendence"
                     },
                 ],
             },
@@ -34,7 +51,7 @@ export const generateSidebar = (pathName: string) => {
                     {
                         title: "Add New Department",
                         url: "/admin/dashboard/departments/add",
-                        isActive: pathName ===  "/admin/dashboard/departments/add"
+                        isActive: pathName === "/admin/dashboard/departments/add"
                     },
                 ],
             },
