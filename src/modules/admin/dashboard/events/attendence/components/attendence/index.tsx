@@ -8,47 +8,102 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Check, Search, X } from "lucide-react"
 import { toast } from "sonner"
 import { IUser, Rank } from "@/types/user"
-import { IEvent } from "@/types/event"
+import { IAddAttendee, IAttendee, IEvent } from "@/types/event"
 import { dateFormatter } from "@/lib/dateFormatter"
+import { useUserContext } from "@/providers/UserProvider"
+import useEvents from "@/services/events"
 
 export interface UsersAttendanceProps {
     users: IUser[];
     event: IEvent;
     selectedEventId: string
 }
+enum Status {
+    PRESENT = "present",
+    ABSENT = "absent",
+    LATE = "late"
+}
 
 const UsersAttendance: FC<UsersAttendanceProps> = ({ users, event, selectedEventId }) => {
-    const [attendees, setAttendees] = useState<IUser[]>(users)
-    const [searchQuery, setSearchQuery] = useState("")
+    console.log('event', event);
+
+    const [attendees, setAttendees] = useState<IAttendee[]>([])
+    const [filteredAttendees, setFilteredAttendees] = useState<IAttendee[]>([])
     const [filterGroup, setFilterGroup] = useState<Rank | string>('all')
 
-    const handleSave = (id: string) => {
+    const { token } = useUserContext();
+    const { update } = useEvents({ token })
 
-    }
+    useEffect(() => {
+        let mapped;
 
-    const updateAttendeeStatus = (id: string, status: "present" | "absent" | "late") => {
-        const updatedAttendees = attendees.map((attendee) => {
-            if (attendee._id === id) {
-                return {
-                    ...attendee,
-                    status,
-                    lastUpdated: new Date().toISOString(),
+        if (event.attendees.length === 0) {
+            mapped = users.map((user) => (
+                {
+                    user: user,
+                    status: Status.LATE
                 }
-            }
-            return attendee
-        })
+            ))
+            setAttendees(mapped)
+            setFilteredAttendees(mapped)
+        } else {
+            mapped = event.attendees.map((user) => (
+                {
+                    user: user.user,
+                    status: user.status
+                }
+            ))
+            setAttendees(mapped)
+            setFilteredAttendees(mapped)
+        }
+    }, [users])
 
-        setAttendees(updatedAttendees)
+    const handleSave = async () => {
+        try {
+
+            const mapped: IAddAttendee[] = attendees.map((att) => ({
+                user: att.user?._id || '',  // Safely handle potentially undefined user
+                attendance: att.attendance,
+                status: att.status
+            }));
+            update(event._id, { attendees: mapped })
+            toast.success("Event updated successfully!");
+        } catch (e: any) {
+            toast.error(e.message);
+        }
     }
 
-    const filteredAttendees = attendees.filter((attendee) => {
-        const matchesSearch =
-            attendee.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            attendee.email.toLowerCase().includes(searchQuery.toLowerCase())
-        const matchesGroup = filterGroup === "all"
+    const updateAttendeeStatus = (attendee: IAttendee, status: Status) => {
+        // console.log('update..', status);
+        const updated = attendees.map(att => att.user._id === attendee.user._id ? {
+            ...attendee,
+            status
+        } : att)
+        setAttendees(updated)
+        setFilteredAttendees(updated)
+    }
 
-        return matchesSearch && matchesGroup
-    })
+    const handleSearch = (query: string) => {
+        const searchTerm = query.toLowerCase().trim();
+        if (searchTerm === "") {
+            setFilteredAttendees(attendees);
+            return;
+        }
+
+        const filtered = attendees.filter((attendee) => {
+            const user = attendee.user;
+            if (!user) return false;
+
+            const matchesSearch =
+                user.firstName?.toLowerCase().includes(searchTerm) ||
+                user.email?.toLowerCase().includes(searchTerm);
+
+            return matchesSearch;
+        });
+
+        console.log('filtered', filtered);
+        setFilteredAttendees(filtered);
+    };
 
 
 
@@ -78,12 +133,11 @@ const UsersAttendance: FC<UsersAttendanceProps> = ({ users, event, selectedEvent
         <>
             <div className="flex items-center justify-content-between p-5">
                 <div className="flex flex-col gap-3 flex-grow " >
-                {/* <div className="flex flex-col gap-3 flex-grow " onClick={() => setSelectedEventId(prev => prev === event._id ? "" : event._id)}> */}
                     <div className="flex-1">{dateFormatter(event.startDate)}</div>
                     <div className="flex-1">{event?.name}</div>
                 </div>
                 <div>
-                    {selectedEventId === event._id && <Button type="button" onClick={() => handleSave(event._id)}>Save</Button>}
+                    {selectedEventId === event._id && <Button type="button" onClick={() => handleSave()}>Save</Button>}
                 </div>
             </div>
             {selectedEventId === event._id && (<div className="space-y-4">
@@ -94,8 +148,7 @@ const UsersAttendance: FC<UsersAttendanceProps> = ({ users, event, selectedEvent
                             <Input
                                 placeholder="Search by name or email..."
                                 className="pl-8"
-                                value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
+                                onChange={(e) => handleSearch(e.target.value)}
                             />
                         </div>
 
@@ -113,26 +166,26 @@ const UsersAttendance: FC<UsersAttendanceProps> = ({ users, event, selectedEvent
                         </Select>
                     </div>
 
-                    {filteredAttendees.length === 0 ? (
+                    {attendees.length === 0 ? (
                         <div className="text-center py-10">
                             <p className="text-muted-foreground">No attendees found</p>
                         </div>
                     ) : (
                         <div className="space-y-4">
-                            {users.map((attendee) => (
-                                <Card key={attendee._id} className="overflow-hidden">
+                            {filteredAttendees.map((attendee) => (
+                                <Card key={attendee.user._id} className="overflow-hidden">
                                     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-4">
                                         <div className="flex items-center gap-4 flex-1">
                                             <Avatar>
-                                                <AvatarImage src={`/placeholder.svg?height=40&width=40&text=${getInitials(attendee.firstName)}`} />
-                                                <AvatarFallback>{getInitials(attendee.firstName)}</AvatarFallback>
+                                                <AvatarImage src={`/placeholder.svg?height=40&width=40&text=${getInitials(attendee?.user?.firstName || '')}`} />
+                                                <AvatarFallback>{getInitials(attendee?.user?.firstName || '')}</AvatarFallback>
                                             </Avatar>
 
                                             <div className="space-y-1">
-                                                <h3 className="font-medium">{attendee.firstName}</h3>
-                                                <p className="text-sm text-muted-foreground">{attendee.email}</p>
+                                                <h3 className="font-medium">{attendee.user.firstName}</h3>
+                                                <p className="text-sm text-muted-foreground">{attendee.user.email}</p>
                                                 <div className="flex items-center gap-2">
-                                                    {/* <Badge variant="outline">{getGroupName(attendee.rank)}</Badge> */}
+                                                    {/* <Badge variant="outline">{getGroupName(attendee.status)}</Status */}
                                                     <div className="flex items-center gap-1">
                                                         {/* <span className={`h-2 w-2 rounded-full ${getStatusColor(attendee.status)}`} /> */}
                                                         {/* <span className="text-xs capitalize">{attendee.status}</span> */}
@@ -144,24 +197,24 @@ const UsersAttendance: FC<UsersAttendanceProps> = ({ users, event, selectedEvent
                                         <div className="flex gap-2 w-full sm:w-auto">
                                             <Button
                                                 size="sm"
-                                                variant={attendee.rank === Rank.ROVER ? "default" : "outline"}
-                                                onClick={() => updateAttendeeStatus(attendee._id, "present")}
+                                                variant={attendee.status === Status.PRESENT ? "default" : "outline"}
+                                                onClick={() => updateAttendeeStatus(attendee, Status.PRESENT)}
                                             >
                                                 <Check className="h-4 w-4 mr-1" />
                                                 Present
                                             </Button>
                                             <Button
                                                 size="sm"
-                                                variant={attendee.rank === Rank.ROVER ? "destructive" : "outline"}
-                                                onClick={() => updateAttendeeStatus(attendee._id, "absent")}
+                                                variant={attendee.status === Status.LATE ? "destructive" : "outline"}
+                                                onClick={() => updateAttendeeStatus(attendee, Status.LATE)}
                                             >
                                                 <X className="h-4 w-4 mr-1" />
                                                 Absent
                                             </Button>
                                             <Button
                                                 size="sm"
-                                                variant={attendee.rank === Rank.ROVER ? "secondary" : "outline"}
-                                                onClick={() => updateAttendeeStatus(attendee._id, "late")}
+                                                variant={attendee.status === Status.ABSENT ? "secondary" : "outline"}
+                                                onClick={() => updateAttendeeStatus(attendee, Status.ABSENT)}
                                             >
                                                 Late
                                             </Button>

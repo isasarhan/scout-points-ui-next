@@ -49,8 +49,31 @@ const useEvents = ({ token }: { token: string | undefined }) => {
         }
     };
 
+    const update = async (id: string, event: Partial<IAddEvent>) => {
+        if (!token) return;
 
-    return { getById, getAll, add };
+        if (!httpService.assignToken(token)) return null;
+
+        try {
+            const res = await instance.put(`${url}/${id}`, event);
+            return res.data;
+        } catch (error) {
+            console.error("Error adding event:", error);
+
+            let errorMessage = "An unexpected error occurred";
+
+            if (axios.isAxiosError(error)) {
+                errorMessage = error.response?.data?.message || error.message || errorMessage;
+            } else if (error instanceof Error) {
+                errorMessage = error.message;
+            }
+
+            throw new Error(errorMessage);
+        }
+    };
+
+
+    return { getById, getAll, add, update };
 }
 
 export default useEvents;

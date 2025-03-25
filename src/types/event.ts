@@ -12,9 +12,14 @@ export enum EventType {
     OTHER = "other"
 }
 
-export interface IAttendee {
+export interface IAddAttendee {
     user: string;
-    attendance: string;
+    attendance?: string;
+    status: Status;
+}
+export interface IAttendee {
+    user: Partial<IUser>;
+    attendance?: string;
     status: Status;
 }
 
@@ -27,7 +32,7 @@ export interface IAddEvent {
     endDate?: string;
     manager?: string
     department?: string
-    attendees?: IAttendee[];
+    attendees?: IAddAttendee[];
 }
 export interface IEvent {
     _id: string
