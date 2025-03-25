@@ -33,7 +33,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import { Role } from "@/types/user";
+import { Rank, Role } from "@/types/user";
 import { IDepartment } from "@/types/department";
 import useUsers from "@/services/users";
 import { toast } from "sonner";
@@ -208,6 +208,31 @@ const AddUserModule: FC<AddUserModuleProps> = ({ departments }) => {
                                                     {Object.values(Role).map((role) => (
                                                         <SelectItem key={role} value={role}>
                                                             {role}
+                                                        </SelectItem>
+                                                    ))}
+                                                </SelectContent>
+                                            </Select>
+                                        </FormControl>
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="rank"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Rank</FormLabel>
+                                        <FormControl>
+                                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                                <FormControl>
+                                                    <SelectTrigger>
+                                                        <SelectValue placeholder="Select Rank" />
+                                                    </SelectTrigger>
+                                                </FormControl>
+                                                <SelectContent>
+                                                    {Object.values(Rank).map((rank) => (
+                                                        <SelectItem key={rank} value={rank}>
+                                                            {rank}
                                                         </SelectItem>
                                                     ))}
                                                 </SelectContent>

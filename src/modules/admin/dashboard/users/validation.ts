@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { Types } from "mongoose";
-import { Role } from "@/types/user";
+import { Rank, Role } from "@/types/user";
 
 const AddressSchema = z.object({
   street: z.string().min(1, "Street is required"),
@@ -24,6 +24,8 @@ const AddUserSchema = z.object({
   department: z.string().optional(),
   profileUrl: z.string().url("Invalid URL format").optional(),
   achievements: z.array(z.instanceof(Types.ObjectId)).optional(),
-  role: z.nativeEnum(Role).default(Role.USER)});
+  role: z.nativeEnum(Role).default(Role.USER),
+  rank: z.nativeEnum(Rank).default(Rank.SCOUT)
+});
 
 export { AddUserSchema, AddressSchema };

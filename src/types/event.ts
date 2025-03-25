@@ -30,7 +30,7 @@ export interface IAddEvent {
     attendees?: IAttendee[];
 }
 export interface IEvent {
-    _id?: string
+    _id: string
     type: EventType
     location: string;
     name?: string;

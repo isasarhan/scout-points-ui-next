@@ -25,7 +25,7 @@ export interface IAddUser {
     role?: Role
 }
 export interface IUser {
-    _id?:string
+    _id:string
     firstName: string;
     lastName: string;
     fatherName: string;
@@ -39,6 +39,8 @@ export interface IUser {
     profileUrl?: string;
     department?: Partial<IDepartment>
     role?: Role
+    rank?: Rank
+
 }
 
 export enum Role {
@@ -46,4 +48,12 @@ export enum Role {
     USER = 'user',
     MANAGER = 'manager',
     MODERATOR = 'moderator',
+}
+
+export enum Rank {
+    LEADER = 'leader',
+    ROVER = 'rover',
+    ADVANCED_SCOUT = 'advanced scout',
+    SCOUT = 'scout',
+    CUB = 'cub',
 }

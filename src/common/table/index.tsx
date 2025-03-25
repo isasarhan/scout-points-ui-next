@@ -18,8 +18,8 @@ const TableComp: FC<TablePropsComp> = ({ data, column, caption }) => {
             {caption && <TableCaption>{caption}</TableCaption>}
             <TableHeader>
                 <TableRow>
-                    {column.map((col) => (
-                        <TableHead>{col.label}</TableHead>
+                    {column.map((col, index) => (
+                        <TableHead key={`table-header-${index}`}>{col.label}</TableHead>
                     ))}
                 </TableRow>
             </TableHeader>

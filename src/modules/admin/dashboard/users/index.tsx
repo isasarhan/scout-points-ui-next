@@ -8,6 +8,8 @@ export interface UsersModuleProps {
     users: IUser[];
 }
 const UsersModule: FC<UsersModuleProps> = ({ users=[] }) => {
+    console.log('users', users);
+    
     const column: Column[] = [
         {
             label: 'First Name',
@@ -24,6 +26,13 @@ const UsersModule: FC<UsersModuleProps> = ({ users=[] }) => {
         {
             label: 'Points',
             value: 'points'
+        },
+        {
+            label: 'Rank',
+            value: 'rank',
+            render:(value)=>(
+                <div>{value}</div>
+            )
         },
         {
             label: 'Department',
