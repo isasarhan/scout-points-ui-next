@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useState, FC } from "react"
+import { useEffect, useState, FC, Fragment } from "react"
 import { IUser } from "@/types/user"
 import { IEvent } from "@/types/event"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -25,7 +25,7 @@ const AttendecModule: FC<AttendecModuleProps> = ({ users, events }) => {
 
             <div className="flex flex-col gap-5 w-full">
                 {events.map(event => (
-                    <>
+                    <Fragment key={event._id}>
                         <Card className="flex-1"    onClick={() => setSelectedEventId(event._id)}>
                           
                             {(
@@ -34,7 +34,7 @@ const AttendecModule: FC<AttendecModuleProps> = ({ users, events }) => {
                                 </div>
                             )}
                         </Card>
-                    </>
+                    </Fragment>
                 ))}
             </div>
         </>

@@ -1,0 +1,43 @@
+import { ViewIcon } from '@/assets/icons';
+import Table, { Column } from '@/common/table';
+import { Card } from '@/components/ui/card';
+import { IAssociation } from '@/types/association';
+import Link from 'next/link';
+import React, { FC } from 'react';
+
+export interface AssociationsModuleProps {
+    associations: IAssociation[]
+}
+
+const AssociationsModule: FC<AssociationsModuleProps> = ({associations=[]}) => {
+    const column: Column[] = [
+        {
+            label: 'Name',
+            value: 'name'
+        },
+        {
+            label: 'Type',
+            value: 'type'
+        },
+        {
+            label: 'Description',
+            value: 'description'
+        },
+        {
+            label: 'View More',
+            value: '_id',
+            render: (value)=>(
+                <div className=''>
+                    <Link href={`/admin/dashboard/users/${value}`}><ViewIcon size={20}/> </Link>
+                </div>
+            )
+        },
+    ]
+    return (
+        <Card className='p-4'>
+            <Table data={associations} column={ column} />
+        </Card>
+    );
+};
+
+export default AssociationsModule;

@@ -39,7 +39,7 @@ const UsersModule: FC<UsersModuleProps> = ({ users=[] }) => {
             value: 'department',
             render: (value)=>(
                 <div className=''>
-                    {value.name}
+                    {value?.name}
                 </div>
             )
         },

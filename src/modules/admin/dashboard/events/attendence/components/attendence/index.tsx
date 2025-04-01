@@ -25,7 +25,6 @@ enum Status {
 }
 
 const UsersAttendance: FC<UsersAttendanceProps> = ({ users, event, selectedEventId }) => {
-    console.log('event', event);
 
     const [attendees, setAttendees] = useState<IAttendee[]>([])
     const [filteredAttendees, setFilteredAttendees] = useState<IAttendee[]>([])
@@ -35,34 +34,21 @@ const UsersAttendance: FC<UsersAttendanceProps> = ({ users, event, selectedEvent
     const { update } = useEvents({ token })
 
     useEffect(() => {
-        let mapped;
-
-        if (event.attendees.length === 0) {
-            mapped = users.map((user) => (
-                {
-                    user: user,
-                    status: Status.LATE
-                }
-            ))
-            setAttendees(mapped)
-            setFilteredAttendees(mapped)
-        } else {
-            mapped = event.attendees.map((user) => (
-                {
-                    user: user.user,
-                    status: user.status
-                }
-            ))
-            setAttendees(mapped)
-            setFilteredAttendees(mapped)
-        }
-    }, [users])
-
+        const attendeeMap = new Map(event.attendees.map(att => [att.user._id, att.status]));
+        
+        const mapped = users.map(user => ({
+            user,
+            status: attendeeMap.get(user._id) || Status.ABSENT
+        }));
+        
+        setAttendees(mapped);
+        setFilteredAttendees(mapped);
+    }, [users, event]);
+    
     const handleSave = async () => {
         try {
-
             const mapped: IAddAttendee[] = attendees.map((att) => ({
-                user: att.user?._id || '',  // Safely handle potentially undefined user
+                user: att.user?._id || '',  
                 attendance: att.attendance,
                 status: att.status
             }));
@@ -74,7 +60,6 @@ const UsersAttendance: FC<UsersAttendanceProps> = ({ users, event, selectedEvent
     }
 
     const updateAttendeeStatus = (attendee: IAttendee, status: Status) => {
-        // console.log('update..', status);
         const updated = attendees.map(att => att.user._id === attendee.user._id ? {
             ...attendee,
             status
@@ -82,41 +67,54 @@ const UsersAttendance: FC<UsersAttendanceProps> = ({ users, event, selectedEvent
         setAttendees(updated)
         setFilteredAttendees(updated)
     }
+    const filterByBatch = (filterGroup: string) => {
+        setFilterGroup(filterGroup)
+        if (filterGroup === "all")
+            setFilteredAttendees(attendees)
+        else {
+            setFilteredAttendees(attendees.filter(attendee => attendee.user.rank === filterGroup))
+        }
+    }
 
     const handleSearch = (query: string) => {
         const searchTerm = query.toLowerCase().trim();
         if (searchTerm === "") {
-            setFilteredAttendees(attendees);
-            return;
+            filterByBatch(filterGroup)
         }
 
-        const filtered = attendees.filter((attendee) => {
+        const filtered = filteredAttendees.filter((attendee) => {
             const user = attendee.user;
             if (!user) return false;
 
             const matchesSearch =
-                user.firstName?.toLowerCase().includes(searchTerm) ||
-                user.email?.toLowerCase().includes(searchTerm);
+                (user.firstName?.toLowerCase().includes(searchTerm) ||
+                    user.email?.toLowerCase().includes(searchTerm))
 
             return matchesSearch;
         });
 
-        console.log('filtered', filtered);
         setFilteredAttendees(filtered);
     };
 
+    const getRankColor = (rank?: Rank) => {
+        
+        switch (rank) {
+            case Rank.LEADER:
+                return "text-white bg-gray-500"
+            case Rank.SCOUT:
+                return "text-white bg-green-500"
+                
+            case Rank.ROVER:
+                return "text-white bg-red-500"
+                
+            case Rank.CUB:
+                return "text-white bg-blue-500"
+                
+            case Rank.ADVANCED_SCOUT:
+                return "text-white bg-gradient-to-r from-red-500 to-green-500"
 
-
-    const getStatusColor = (status: string) => {
-        switch (status) {
-            case "present":
-                return "bg-green-500"
-            case "absent":
-                return "bg-red-500"
-            case "late":
-                return "bg-yellow-500"
             default:
-                return "bg-gray-500"
+                return "text-white bg-gray-500"
         }
     }
 
@@ -152,16 +150,17 @@ const UsersAttendance: FC<UsersAttendanceProps> = ({ users, event, selectedEvent
                             />
                         </div>
 
-                        <Select value={filterGroup} onValueChange={setFilterGroup}>
+                        <Select value={filterGroup} onValueChange={filterByBatch}>
                             <SelectTrigger className="w-full md:w-[180px]">
                                 <SelectValue placeholder="Filter by group" />
                             </SelectTrigger>
                             <SelectContent>
-                                <SelectItem value="all">All Groups</SelectItem>
-                                <SelectItem value="class-a">Class A</SelectItem>
-                                <SelectItem value="class-b">Class B</SelectItem>
-                                <SelectItem value="team-1">Team 1</SelectItem>
-                                <SelectItem value="team-2">Team 2</SelectItem>
+                                <SelectItem value="all">All Ranks</SelectItem>
+                                {Object.values(Rank).map((rank) => (
+                                    <SelectItem key={rank} value={rank}>
+                                        {rank}
+                                    </SelectItem>
+                                ))}
                             </SelectContent>
                         </Select>
                     </div>
@@ -185,7 +184,7 @@ const UsersAttendance: FC<UsersAttendanceProps> = ({ users, event, selectedEvent
                                                 <h3 className="font-medium">{attendee.user.firstName}</h3>
                                                 <p className="text-sm text-muted-foreground">{attendee.user.email}</p>
                                                 <div className="flex items-center gap-2">
-                                                    {/* <Badge variant="outline">{getGroupName(attendee.status)}</Status */}
+                                                    <Badge variant="outline" className={getRankColor(attendee?.user?.rank)}>{attendee?.user?.rank}</Badge>
                                                     <div className="flex items-center gap-1">
                                                         {/* <span className={`h-2 w-2 rounded-full ${getStatusColor(attendee.status)}`} /> */}
                                                         {/* <span className="text-xs capitalize">{attendee.status}</span> */}
@@ -205,7 +204,7 @@ const UsersAttendance: FC<UsersAttendanceProps> = ({ users, event, selectedEvent
                                             </Button>
                                             <Button
                                                 size="sm"
-                                                variant={attendee.status === Status.LATE ? "destructive" : "outline"}
+                                                variant={attendee.status === Status.ABSENT ? "destructive" : "outline"}
                                                 onClick={() => updateAttendeeStatus(attendee, Status.LATE)}
                                             >
                                                 <X className="h-4 w-4 mr-1" />
@@ -213,7 +212,7 @@ const UsersAttendance: FC<UsersAttendanceProps> = ({ users, event, selectedEvent
                                             </Button>
                                             <Button
                                                 size="sm"
-                                                variant={attendee.status === Status.ABSENT ? "secondary" : "outline"}
+                                                variant={attendee.status === Status.LATE ? "secondary" : "outline"}
                                                 onClick={() => updateAttendeeStatus(attendee, Status.ABSENT)}
                                             >
                                                 Late

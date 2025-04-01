@@ -11,7 +11,7 @@ const EventsPage: FC<EventsPageProps> = async () => {
     const parsedUser = JSON.parse(currentUser)
 
     const { getAll } = useEvents({ token: token })
-    const data = await getAll(parsedUser.department._id);
+    const data = await getAll(parsedUser.department?._id);
     return (
         <EventsModule events={data}/>
     );

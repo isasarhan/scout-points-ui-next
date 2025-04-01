@@ -62,13 +62,13 @@ export function TimeRangePicker({ value = defaultTimeRange, onChange, disabled =
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button variant="outline" className="w-[280px] justify-start text-left font-normal" disabled={disabled}>
+        <Button variant="outline" className="w-full justify-start text-left font-normal" disabled={disabled}>
           <Clock className="mr-2 h-4 w-4" />
           <span>{formattedTimeRange}</span>
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-4" align="start">
-        <div className="space-y-4">
+        <div className="space-y-4 w-full">
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <div className="text-sm font-medium">Start Time</div>
@@ -175,7 +175,7 @@ export function TimeRangePicker({ value = defaultTimeRange, onChange, disabled =
             </div>
           </div>
 
-          <Button type="button" className="w-full" onClick={handleApply} disabled={disabled}>
+          <Button type="button" className="" onClick={handleApply} disabled={disabled}>
             Apply Time Range
           </Button>
         </div>

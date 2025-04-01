@@ -10,8 +10,8 @@ const UsersPage = async () => {
         const parsedUser = JSON.parse(currentUser)
     
     const { getAll } = useUsers({ token: token })
-    const data = await getAll(parsedUser.department._id);
-
+    const data = await getAll(parsedUser.department?._id);
+    
     return (
         <UsersModule users={data} />
     );

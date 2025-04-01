@@ -92,7 +92,7 @@ export default function AddEventModule({ departments }: { departments: IDepartme
                                 control={form.control}
                                 name="timeRange"
                                 render={({ field }) => (
-                                    <FormItem className="flex-1">
+                                    <FormItem className="flex-1 ">
                                         <FormLabel>Meeting Time Range</FormLabel>
                                         <FormControl>
                                             <TimeRangePicker value={field.value} onChange={field.onChange} />
