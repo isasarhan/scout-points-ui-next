@@ -15,7 +15,7 @@ export interface AttendecModuleProps {
 const AttendecModule: FC<AttendecModuleProps> = ({ users, events }) => {
     const [selectedEventId, setSelectedEventId] = useState<string>("")
 
-    
+
     return (
         <>
             <CardHeader>
@@ -26,13 +26,10 @@ const AttendecModule: FC<AttendecModuleProps> = ({ users, events }) => {
             <div className="flex flex-col gap-5 w-full">
                 {events.map(event => (
                     <Fragment key={event._id}>
-                        <Card className="flex-1"    onClick={() => setSelectedEventId(event._id)}>
-                          
-                            {(
-                                <div className=" mt-2">
-                                    <UsersAttendance users={users} event={event} selectedEventId={selectedEventId}/>
-                                </div>
-                            )}
+                        <Card className="flex-1" onClick={() => setSelectedEventId(event._id)}>
+                            {(<div className=" mt-2">
+                                <UsersAttendance users={users} event={event} selectedEventId={selectedEventId} />
+                            </div>)}
                         </Card>
                     </Fragment>
                 ))}

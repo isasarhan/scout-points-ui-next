@@ -19,16 +19,16 @@ const TableComp: FC<TablePropsComp> = ({ data, column, caption }) => {
             <TableHeader>
                 <TableRow>
                     {column.map((col, index) => (
-                        <TableHead key={`table-header-${index}`}>{col.label}</TableHead>
+                        <TableHead key={`table-header-${index}`} className='p-0 text-center'>{col.label}</TableHead>
                     ))}
                 </TableRow>
             </TableHeader>
             <TableBody>
                 {
                     data.map((v, index) => (
-                        <TableRow className='p-4' key={`table-index-${index}`}>
+                        <TableRow className='p-0 text-center' key={`table-index-${index}`}>
                             {column.map((col, colIndx) => (
-                                <TableCell className='p-5' key={`table-col-index-${colIndx}`}>{col.render ? col.render(v[col.value]) : v[col.value]}</TableCell>
+                                <TableCell className='p-4 text-center' key={`table-col-index-${colIndx}`}>{col.render ? col.render(v[col.value]) : v[col.value]}</TableCell>
                             ))}
                         </TableRow>
                     ))

@@ -13,6 +13,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { EnumDepartmentType } from '@/types/department';
 
 const AddDepartmentModule: FC<AddDepartmentModuleProps> = () => {
     const { token } = useUserContext()
@@ -30,14 +31,14 @@ const AddDepartmentModule: FC<AddDepartmentModuleProps> = () => {
                 street: ""
             },
             status: ""
-                }
+        }
     });
     const { handleSubmit } = form
 
     const onSubmit = (data: any) => {
-        const filteredValues = { 
-            ...data, 
-            manager: data.manager === "" ? undefined : data.manager 
+        const filteredValues = {
+            ...data,
+            manager: data.manager === "" ? undefined : data.manager
         };
         add(filteredValues).then(() => {
             toast.success("Department added successfully!")
@@ -96,7 +97,11 @@ const AddDepartmentModule: FC<AddDepartmentModuleProps> = () => {
                                                 </SelectTrigger>
                                             </FormControl>
                                             <SelectContent>
-                                                <SelectItem value="scout">Scout</SelectItem>
+                                                {Object.values(EnumDepartmentType).map((type) => (
+                                                    <SelectItem key={type} value={type}>
+                                                        {type}
+                                                    </SelectItem>
+                                                ))}
                                             </SelectContent>
                                         </Select>
 

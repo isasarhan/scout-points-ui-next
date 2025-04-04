@@ -1,5 +1,7 @@
 export enum EnumDepartmentType {
-  SCOUT = "scout",
+  SCOUT = 'scout',
+  UNIVERSITY = 'university',
+  NEIGHBORHOOD = 'neighborhood'
 }
 export enum EnumDepartmentStatus {
   ACTIVE = "active",
@@ -18,8 +20,6 @@ export interface IDepartment {
   location: ILocation;
   type: EnumDepartmentType;
   status: EnumDepartmentStatus;
-  createdAt: Date;
-  updatedAt: Date;
   description: string;
   manager?: string;
 }

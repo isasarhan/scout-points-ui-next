@@ -31,7 +31,7 @@ const AchievementsModule: FC<AchievementsModuleProps> = ({ achievements }) => {
       label: 'View More',
       value: '_id',
       render: (value) => (
-        <div className=''>
+        <div className='flex justify-center items-center w-full'>
           <Link href={`/admin/dashboard/achievements/${value}`}><ViewIcon size={20} /> </Link>
         </div>
       )

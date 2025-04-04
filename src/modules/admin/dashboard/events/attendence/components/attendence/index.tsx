@@ -12,6 +12,7 @@ import { IAddAttendee, IAttendee, IEvent } from "@/types/event"
 import { dateFormatter } from "@/lib/dateFormatter"
 import { useUserContext } from "@/providers/UserProvider"
 import useEvents from "@/services/events"
+import { getInitials, getRankColor } from "@/lib/utils"
 
 export interface UsersAttendanceProps {
     users: IUser[];
@@ -95,37 +96,6 @@ const UsersAttendance: FC<UsersAttendanceProps> = ({ users, event, selectedEvent
 
         setFilteredAttendees(filtered);
     };
-
-    const getRankColor = (rank?: Rank) => {
-        
-        switch (rank) {
-            case Rank.LEADER:
-                return "text-white bg-gray-500"
-            case Rank.SCOUT:
-                return "text-white bg-green-500"
-                
-            case Rank.ROVER:
-                return "text-white bg-red-500"
-                
-            case Rank.CUB:
-                return "text-white bg-blue-500"
-                
-            case Rank.ADVANCED_SCOUT:
-                return "text-white bg-gradient-to-r from-red-500 to-green-500"
-
-            default:
-                return "text-white bg-gray-500"
-        }
-    }
-
-    const getInitials = (name: string) => {
-        return name
-            .split(" ")
-            .map((part) => part[0])
-            .join("")
-            .toUpperCase()
-            .substring(0, 2)
-    }
 
     return (
         <>

@@ -24,10 +24,14 @@ const AssociationsModule: FC<AssociationsModuleProps> = ({associations=[]}) => {
             value: 'description'
         },
         {
+            label: 'Website',
+            value: 'website'
+        },
+        {
             label: 'View More',
             value: '_id',
             render: (value)=>(
-                <div className=''>
+                <div className='flex justify-center items-center w-full'>
                     <Link href={`/admin/dashboard/users/${value}`}><ViewIcon size={20}/> </Link>
                 </div>
             )

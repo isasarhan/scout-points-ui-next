@@ -56,6 +56,22 @@ export const generateSidebar = (pathName: string) => {
                 ],
             },
             {
+                title: "Associations",
+                url: "#",
+                items: [
+                    {
+                        title: "All Associations",
+                        url: "/admin/dashboard/associations",
+                        isActive: pathName === "/admin/dashboard/associations"
+                    },
+                    {
+                        title: "Add New Associations",
+                        url: "/admin/dashboard/associations/add",
+                        isActive: pathName === "/admin/dashboard/associations/add"
+                    },
+                ],
+            },
+            {
                 title: "Achievements",
                 url: "#",
                 items: [

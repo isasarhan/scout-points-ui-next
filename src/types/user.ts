@@ -22,6 +22,7 @@ export interface IAddUser {
     points?: number;
     profileUrl?: string;
     department?: string
+    isSuperAdmin?: boolean;
     role?: Role
 }
 export interface IUser {

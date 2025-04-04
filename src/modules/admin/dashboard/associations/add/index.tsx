@@ -15,6 +15,7 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
+import { EnumAssociationType } from '@/types/association';
 
 export interface AddAssociationModuleProps { }
 
@@ -43,7 +44,7 @@ const AddAssociationModule: FC<AddAssociationModuleProps> = () => {
     return (
         <Card>
             <CardHeader>
-                <CardTitle className="text-2xl font-bold">Add User</CardTitle>
+                <CardTitle className="text-2xl font-bold">Add Association</CardTitle>
                 <CardDescription>
                     Fill in the details to create a new association
                 </CardDescription>
@@ -59,7 +60,20 @@ const AddAssociationModule: FC<AddAssociationModuleProps> = () => {
                                     <FormItem className="flex-1">
                                         <FormLabel>Name</FormLabel>
                                         <FormControl>
-                                            <Input placeholder="Enter user first name" {...field} />
+                                            <Input placeholder="Enter association name" {...field} />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="website"
+                                render={({ field }) => (
+                                    <FormItem className="flex-1">
+                                        <FormLabel>Website</FormLabel>
+                                        <FormControl>
+                                            <Input placeholder="Enter association website" {...field} />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -79,7 +93,11 @@ const AddAssociationModule: FC<AddAssociationModuleProps> = () => {
                                                     </SelectTrigger>
                                                 </FormControl>
                                                 <SelectContent>
-                                                    <SelectItem value="scout">Scout</SelectItem>
+                                                    {Object.values(EnumAssociationType).map((type) => (
+                                                        <SelectItem key={type} value={type}>
+                                                            {type}
+                                                        </SelectItem>
+                                                    ))}
                                                 </SelectContent>
                                             </Select>
 

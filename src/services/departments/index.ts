@@ -1,5 +1,6 @@
 import { IDepartment } from '@/types/department';
 import httpService from '../axios';
+import axios from "axios";
 
 const useDepartments = ({ token }: { token: string | undefined }) => {
     const instance = httpService.instance
@@ -19,11 +20,28 @@ const useDepartments = ({ token }: { token: string | undefined }) => {
     };
 
     const add = async (department: IDepartment) => {
-        if (!token) return
-        return httpService.assignToken(token) ? await instance.post(`${url}/add`, department).then((res) => {
-            return res.data
-        }).catch((e) => console.log(e)) : null
+        if (!token) return;
+
+        if (!httpService.assignToken(token)) return null;
+
+        try {
+            const res = await instance.post(`${url}/add`, department);
+            return res.data;
+        } catch (error) {
+            console.error("Error adding department:", error);
+
+            let errorMessage = "An unexpected error occurred";
+
+            if (axios.isAxiosError(error)) {
+                errorMessage = error.response?.data?.message || error.message || errorMessage;
+            } else if (error instanceof Error) {
+                errorMessage = error.message;
+            }
+
+            throw new Error(errorMessage);
+        }
     };
+
 
     return { getById, getAll, add };
 }
