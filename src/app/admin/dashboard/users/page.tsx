@@ -6,8 +6,7 @@ import { cookies } from "next/headers";
 const UsersPage = async () => {
     const token = (await cookies()).get("token")?.value;
     const currentUser = (await cookies()).get("currentUser")?.value || '';
-    console.log('currentUser', JSON.parse(currentUser));
-        const parsedUser = JSON.parse(currentUser)
+    const parsedUser = JSON.parse(currentUser)
     
     const { getAll } = useUsers({ token: token })
     const data = await getAll(parsedUser.department?._id);

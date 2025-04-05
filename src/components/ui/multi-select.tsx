@@ -25,7 +25,7 @@ interface MultiSelectProps {
 
 export function MultiSelect({
   options,
-  selected,
+  selected=[],
   onChange,
   placeholder = "Select options...",
   emptyMessage = "No options found.",
@@ -33,7 +33,9 @@ export function MultiSelect({
   badgeClassName,
 }: MultiSelectProps) {
   const [open, setOpen] = React.useState(false)
-
+  console.log('selected', selected);
+  console.log('options', options);
+  
   const handleUnselect = (value: string) => {
     onChange(selected.filter((item) => item !== value))
   }
@@ -58,7 +60,7 @@ export function MultiSelect({
           )}
         >
           <div className="flex flex-wrap gap-1">
-            {selected.length > 0 ? (
+            {selected?.length > 0 ? (
               selected.map((value) => {
                 const option = options.find((option) => option._id === value)
                 return (

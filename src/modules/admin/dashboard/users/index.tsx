@@ -1,5 +1,5 @@
 import { ViewIcon } from '@/assets/icons';
-import Table, { Column } from '@/common/table';
+import Table, { Column } from '@/components/table';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { getRankColor } from '@/lib/utils';

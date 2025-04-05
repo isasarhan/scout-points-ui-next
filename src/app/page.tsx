@@ -1,22 +1,37 @@
 import { Button } from '@/components/ui/button';
+import { ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 import { FC } from 'react';
+import { Navbar } from './(auth)/components/navbar';
 
 const LandingPage: FC = () => {
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-800">
-      <header className="py-8 text-center bg-gradient-to-r from-yellow-300 to-yellow-600 text-white">
-        <h1 className="text-4xl font-bold">Welcome to the Scouts Achievements Game</h1>
-        <p className="mt-4 text-lg">Earn points as you complete different achievements and level up!</p>
-      </header>
-      
-      <section className="py-16 px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="text-2xl font-semibold text-gray-900">How It Works</h2>
-        <p className="mt-4 max-w-2xl mx-auto text-gray-700">
-          The more you participate in scouting activities, the more points you earn! Complete achievements
-          to climb the leaderboard and earn rewards.
-        </p>
-      </section>
-      
+    <>
+     <Navbar />
+    <div className="min-h-screen bg-slate-100 text-gray-800">
+      <div className="relative z-10 container mx-auto px-4 py-32 text-center ">
+        <h1 className="text-4xl md:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-scout-pine to-scout-moss">
+          Welcome to the Scouts Achievements Game</h1>
+          <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto">Earn points as you complete different achievements and level up!</p>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Button size="lg" asChild>
+            <Link href="/achievements">
+              Explore Achievements
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
+          </Button>
+          <Button
+            variant="outline"
+            size="lg"
+            asChild
+          >
+            <Link href="/profile">View Your Progress</Link>
+          </Button>
+        </div>
+      </div>
+
+
+
       <section className="bg-white py-16 px-4 sm:px-6 lg:px-8 text-center">
         <h2 className="text-2xl font-semibold text-gray-900">Achievements & Points</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
@@ -50,6 +65,7 @@ const LandingPage: FC = () => {
         <p>2025 Scouts Achievements Game</p>
       </footer>
     </div>
+    </>
   );
 };
 

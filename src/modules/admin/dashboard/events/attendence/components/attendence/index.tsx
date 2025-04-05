@@ -2,7 +2,7 @@ import { useEffect, useState, FC } from "react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Check, Search, X } from "lucide-react"
@@ -36,20 +36,20 @@ const UsersAttendance: FC<UsersAttendanceProps> = ({ users, event, selectedEvent
 
     useEffect(() => {
         const attendeeMap = new Map(event.attendees.map(att => [att.user._id, att.status]));
-        
+
         const mapped = users.map(user => ({
             user,
             status: attendeeMap.get(user._id) || Status.ABSENT
         }));
-        
+
         setAttendees(mapped);
         setFilteredAttendees(mapped);
     }, [users, event]);
-    
+
     const handleSave = async () => {
         try {
             const mapped: IAddAttendee[] = attendees.map((att) => ({
-                user: att.user?._id || '',  
+                user: att.user?._id || '',
                 attendance: att.attendance,
                 status: att.status
             }));
@@ -62,11 +62,12 @@ const UsersAttendance: FC<UsersAttendanceProps> = ({ users, event, selectedEvent
 
     const updateAttendeeStatus = (attendee: IAttendee, status: Status) => {
         const updated = attendees.map(att => att.user._id === attendee.user._id ? {
-            ...attendee,
-            status
+            ...attendee, status
         } : att)
+        setFilteredAttendees(prev => prev.map(att => att.user._id === attendee.user._id ? {
+            ...attendee, status
+        } : att))
         setAttendees(updated)
-        setFilteredAttendees(updated)
     }
     const filterByBatch = (filterGroup: string) => {
         setFilterGroup(filterGroup)
@@ -175,7 +176,7 @@ const UsersAttendance: FC<UsersAttendanceProps> = ({ users, event, selectedEvent
                                             <Button
                                                 size="sm"
                                                 variant={attendee.status === Status.ABSENT ? "destructive" : "outline"}
-                                                onClick={() => updateAttendeeStatus(attendee, Status.LATE)}
+                                                onClick={() => updateAttendeeStatus(attendee, Status.ABSENT)}
                                             >
                                                 <X className="h-4 w-4 mr-1" />
                                                 Absent
@@ -183,7 +184,7 @@ const UsersAttendance: FC<UsersAttendanceProps> = ({ users, event, selectedEvent
                                             <Button
                                                 size="sm"
                                                 variant={attendee.status === Status.LATE ? "secondary" : "outline"}
-                                                onClick={() => updateAttendeeStatus(attendee, Status.ABSENT)}
+                                                onClick={() => updateAttendeeStatus(attendee, Status.LATE)}
                                             >
                                                 Late
                                             </Button>

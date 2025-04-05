@@ -11,11 +11,12 @@ const AttendencePage: FC<AttendencePageProps> = async () => {
     const currentUser = (await cookies()).get("currentUser")?.value || '';
     const parsedUser = JSON.parse(currentUser)
 
-    const { getAll } = useUsers({ token: token })
+    const { getAll } = useUsers({ token: token })    
     const data = await getAll(parsedUser.department?._id);
-
+    
     const { getAll:getAllEvents } = useEvents({ token: token })
-    const dataEvents = await getAllEvents(parsedUser.department?._id);
+    const dataEvents = await getAllEvents();
+    
     return (
         <AttendenceModule users={data} events={dataEvents}/>
     );

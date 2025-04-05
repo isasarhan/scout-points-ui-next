@@ -5,15 +5,29 @@ import { IAddEvent } from '@/types/event';
 const useEvents = ({ token }: { token: string | undefined }) => {
     const instance = httpService.instance
     let url = `/events`;
+
     const getAll = async (department?: string) => {
-        if (!token) return
-        const params = department ? { department } : {}
-        return httpService.assignToken(token) ? await instance.get(`${url}`, { params }).then((res) => {
+        const params = department ? {department} : {} 
+        if (!token) return;
+
+        if (!httpService.assignToken(token)) return null;
+
+        try {
+            const res = await instance.get(`${url}`);
             return res.data
-        }).catch((e) => {
-            console.log(e)
-            throw new Error(e)
-        }) : null
+        } catch (error) {
+            console.error("Error getting events:", error);
+
+            let errorMessage = "An unexpected error occurred";
+
+            if (axios.isAxiosError(error)) {
+                errorMessage = error.response?.data?.message || error.message || errorMessage;
+            } else if (error instanceof Error) {
+                errorMessage = error.message;
+            }
+
+            throw new Error(errorMessage);
+        }
     };
 
     const getById = async (id: string) => {

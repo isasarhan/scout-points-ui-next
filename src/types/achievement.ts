@@ -8,4 +8,11 @@ export interface IAchievement {
     departments: string[];
     attachments?: string[];
     points: number
+    requirements?: string[]
+    level: Level;
+}
+export enum Level {
+    BEGINNER = "beginner",
+    INTERMEDIATE = "intermediate",
+    ADVANCED = "advanced",
 }

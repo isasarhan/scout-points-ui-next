@@ -1,3 +1,4 @@
+import { Navbar } from "@/app/(auth)/components/navbar"
 import { AppSidebar } from "@/components/app-sidebar"
 import {
   Breadcrumb,
@@ -13,11 +14,13 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
+import Link from "next/link"
 import { ReactNode } from "react"
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   return (
     <>
+
       <SidebarProvider>
         <AppSidebar />
         <SidebarInset>
@@ -29,7 +32,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                 <BreadcrumbList>
                   <BreadcrumbItem className="hidden md:block">
                     <BreadcrumbLink href="#">
-                      Building Your Application
+                      <Link href={'/'}>Home</Link>
                     </BreadcrumbLink>
                   </BreadcrumbItem>
                   <BreadcrumbSeparator className="hidden md:block" />

@@ -1,11 +1,9 @@
 "use client"
-import { useEffect, useState, FC, Fragment } from "react"
+import { useState, FC, Fragment } from "react"
 import { IUser } from "@/types/user"
 import { IEvent } from "@/types/event"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { dateFormatter } from "@/lib/dateFormatter";
 import UsersAttendance from "./components/attendence";
-import { Button } from "@/components/ui/button";
 
 export interface AttendecModuleProps {
     users: IUser[];
@@ -14,7 +12,6 @@ export interface AttendecModuleProps {
 
 const AttendecModule: FC<AttendecModuleProps> = ({ users, events }) => {
     const [selectedEventId, setSelectedEventId] = useState<string>("")
-
 
     return (
         <>

@@ -20,6 +20,6 @@ export const addEventSchema = z.object({
     endDate: z.string().optional(),
     description: z.string().optional(),
     manager: z.string().optional(),
-    department: z.string().min(1, "Department is required"),
+    departments: z.array(z.string()).min(1, "At least one category is required"),
     type: z.nativeEnum(EventType).default(EventType.INDOOR)
 });

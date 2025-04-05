@@ -35,7 +35,10 @@ export function Navbar() {
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4">
                 <NavLink href="/">Home</NavLink>
+                <NavLink href="/admin/dashboard">Admin</NavLink>
                 <NavLink href="/about">About</NavLink>
+                <NavLink href="/achievements">Achievements</NavLink>
+
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="ghost" className="px-3 py-2 text-sm font-medium">
@@ -44,7 +47,7 @@ export function Navbar() {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent>
                     <DropdownMenuItem>
-                      <Link href="/services/web-development">Web Development</Link>
+                      <Link href="/achievements">Achievemnts</Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem>
                       <Link href="/services/app-development">App Development</Link>
@@ -87,7 +90,7 @@ export function Navbar() {
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             <NavLink href="/">Home</NavLink>
             <NavLink href="/about">About</NavLink>
-            <NavLink href="/services">Services</NavLink>
+            <NavLink href="/achievements">Achievements</NavLink>
             <NavLink href="/contact">Contact</NavLink>
             <div className="relative mt-3">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />

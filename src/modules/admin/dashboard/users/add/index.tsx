@@ -24,7 +24,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { AddUserSchema } from "../validation";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
-import Autocomplete from "@/common/autocomplete";
+import Autocomplete from "@/components/autocomplete";
 import { nationalities } from "@/lib/nationalities";
 import {
     Select,

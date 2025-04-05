@@ -31,7 +31,7 @@ export interface IAddEvent {
     startDate: string;
     endDate?: string;
     manager?: string
-    department?: string
+    departments?: string[]
     attendees?: IAddAttendee[];
 }
 export interface IEvent {
@@ -42,6 +42,6 @@ export interface IEvent {
     startDate: string;
     endDate?: string;
     manager?: Partial<IUser>
-    department?: Partial<IDepartment>
+    departments?: Partial<IDepartment>[]
     attendees: IAttendee[];
 }

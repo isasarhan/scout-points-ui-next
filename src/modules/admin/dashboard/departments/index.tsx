@@ -1,5 +1,5 @@
 import { Card } from '@/components/ui/card';
-import Table, { Column } from '@/common/table';
+import Table, { Column } from '@/components/table';
 import { IDepartment } from '@/types/department';
 import React, { FC } from 'react';
 import Link from 'next/link';

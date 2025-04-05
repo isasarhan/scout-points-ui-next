@@ -1,5 +1,5 @@
 import { ViewIcon } from '@/assets/icons';
-import Table, { Column } from '@/common/table';
+import Table, { Column } from '@/components/table';
 import { Card } from '@/components/ui/card';
 import { IAssociation } from '@/types/association';
 import Link from 'next/link';

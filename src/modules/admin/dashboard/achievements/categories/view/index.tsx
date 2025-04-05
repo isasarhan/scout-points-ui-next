@@ -1,5 +1,5 @@
 import { ViewIcon } from '@/assets/icons';
-import Table, { Column } from '@/common/table';
+import Table, { Column } from '@/components/table';
 import { Card } from '@/components/ui/card';
 import { IAchievemntCategory } from '@/types/achievemntCategory';
 import Link from 'next/link';
@@ -23,7 +23,7 @@ const AchievementsCategoriesModule: FC<AchievementsCategoriesModuleProps> = ({ c
     ]
     return (
         
-        <div className="flex gap-5 ">
+        <div className="flex gap-5 items-center">
             <div className="flex-1">
                 <AddAchievementsCategoriesModule />
             </div>

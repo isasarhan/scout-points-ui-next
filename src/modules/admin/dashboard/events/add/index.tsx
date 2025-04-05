@@ -1,5 +1,5 @@
 'use client'
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Input } from "@/components/ui/input";
@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import DatePicker from "@/common/datepicker";
+import DatePicker from "@/components/datepicker";
 import { IDepartment } from "@/types/department";
 import { Textarea } from "@/components/ui/textarea";
 import { EventType } from "@/types/event";
@@ -17,6 +17,7 @@ import { toast } from "sonner";
 import { useUserContext } from "@/providers/UserProvider";
 import useEvents from "@/services/events";
 import { TimeRangePicker } from "@/components/ui/time-range-picker";
+import { MultiSelect } from "@/components/ui/multi-select";
 
 
 
@@ -154,34 +155,32 @@ export default function AddEventModule({ departments }: { departments: IDepartme
                                     </FormItem>
                                 )}
                             />
-
+  
                             <FormField
                                 control={form.control}
-                                name="department"
-                                render={({ field }) => (
+                                name="departments"
+                                render={({ }) => (
                                     <FormItem className="flex-1">
                                         <FormLabel>Department</FormLabel>
                                         <FormControl>
-                                            <Select
-                                                onValueChange={field.onChange}
-                                                defaultValue={field.value}>
-                                                <FormControl>
-                                                    <SelectTrigger>
-                                                        <SelectValue placeholder="Select Department" />
-                                                    </SelectTrigger>
-                                                </FormControl>
-                                                <SelectContent>
-                                                    {departments.map((department) => (
-                                                        <SelectItem value={department._id}>
-                                                            {department.name}
-                                                        </SelectItem>
-                                                    ))}
-                                                </SelectContent>
-                                            </Select>
+                                            <Controller
+                                                control={form.control}
+                                                name="departments"
+                                                render={({ field }) => (
+                                                    <MultiSelect
+                                                        options={departments}
+                                                        selected={field.value}
+                                                        onChange={field.onChange}
+                                                        placeholder="Select departments..."
+                                                    />
+                                                )}
+                                            />
                                         </FormControl>
+                                        <FormMessage />
                                     </FormItem>
                                 )}
                             />
+
                         </div>
                         <div>
                             <FormField

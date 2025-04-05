@@ -6,10 +6,9 @@ const useAchievements = ({ token }: { token: string | undefined }) => {
     const instance = httpService.instance
     let url = `/achievements`;
     const getAll = async () => {
-        if (!token) return
-        return httpService.assignToken(token) ? await instance.get(`${url}`).then((res) => {
+        return  await instance.get(`${url}`).then((res) => {
             return res.data
-        }).catch((e) => console.log(e)) : null
+        }).catch((e) => console.log(e))
     };
 
     const getById = async (id: string) => {
