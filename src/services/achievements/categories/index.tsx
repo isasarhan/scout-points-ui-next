@@ -6,13 +6,12 @@ const useAchievementCategory = ({ token }: { token: string | undefined }) => {
     const instance = httpService.instance
     const url = `/achievements-categories`;
     const getAll = async () => {
-        if (!token) return
-        return httpService.assignToken(token) ? await instance.get(`${url}`).then((res) => {
+        return  await instance.get(`${url}`).then((res) => {
             return res.data
         }).catch((e) => {
             console.log(e)
             throw new Error(e)
-        }) : null
+        })
     };
 
     const getById = async (id: string) => {

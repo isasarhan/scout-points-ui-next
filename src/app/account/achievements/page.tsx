@@ -3,10 +3,9 @@ import useAchievements from '@/services/achievements';
 import useAchievementCategory from '@/services/achievements/categories';
 import { cookies } from 'next/headers';
 import React, { FC } from 'react';
+export interface AccountAchievementsPageProps { }
 
-export interface AchievementsPageProps { }
-
-const AchievementsPage: FC<AchievementsPageProps> = async () => {
+const AccountAchievementsPage: FC<AccountAchievementsPageProps> = async () => {
     const token = (await cookies()).get("token")?.value;
 
     const { getAll } = useAchievements({ token: token })
@@ -21,4 +20,4 @@ const AchievementsPage: FC<AchievementsPageProps> = async () => {
     );
 };
 
-export default AchievementsPage;
+export default AccountAchievementsPage;
