@@ -4,7 +4,7 @@ import axios from "axios";
 
 const useAssociations = ({ token }: { token: string | undefined }) => {
   const instance = httpService.instance
-  let url = `/associations`;
+  const url = `/associations`;
   const getAll = async () => {
     if (!token) return
     return httpService.assignToken(token) ? await instance.get(`${url}`).then((res) => {

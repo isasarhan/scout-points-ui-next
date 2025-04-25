@@ -2,9 +2,9 @@
 import useAuth from '@/services/auth';
 import { createContext, useContext, useEffect, useState, type FC, type ReactNode } from 'react';
 import Cookies from 'js-cookie';
-import { IUser, Role } from '@/types/user';
+import { IUser } from '@/types/user';
 import { toast } from "sonner"
-import { FailedCircleIcon, SuccessCircleIcon } from '@/assets/icons';
+import { FailedCircleIcon } from '@/assets/icons';
 import { useRouter } from 'next/navigation';
 
 interface UserProviderProps {
@@ -12,7 +12,7 @@ interface UserProviderProps {
 }
 
 interface UserContextType {
-    user: IUser | undefined,
+    user: IUser | null | undefined,
     token: string,
     isLoggedIn: boolean,
     signIn(email: string, password: string): Promise<IUser>
@@ -31,7 +31,7 @@ export const useUserContext = () => {
 
 
 const UserProvider: FC<UserProviderProps> = ({ children }) => {
-    const [user, setUser] = useState<IUser>()
+    const [user, setUser] = useState<IUser|null>()
     const [token, setToken] = useState('')
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const { login } = useAuth()
@@ -57,7 +57,7 @@ const UserProvider: FC<UserProviderProps> = ({ children }) => {
         setIsLoggedIn(false);
         setToken('')
         router.refresh()
-        setUser({ firstName: '', lastName: '', email: '', fatherName: '', password: '', role: Role.ADMIN, phone: '' })
+        setUser(null)
         return
     }
 

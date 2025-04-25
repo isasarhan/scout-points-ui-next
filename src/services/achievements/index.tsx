@@ -4,7 +4,7 @@ import axios from "axios";
 
 const useAchievements = ({ token }: { token: string | undefined }) => {
     const instance = httpService.instance
-    let url = `/achievements`;
+    const url = `/achievements`;
     const getAll = async () => {
         return  await instance.get(`${url}`).then((res) => {
             return res.data

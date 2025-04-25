@@ -25,8 +25,24 @@ export interface IAddUser {
     isSuperAdmin?: boolean;
     role?: Role
 }
+export interface IAddUser{
+    firstName: string;
+    lastName: string;
+    fatherName: string;
+    motherName?: string;
+    email: string;
+    password: string;
+    phone?: string;
+    address?: Address;
+    nationality?: string;
+    points?: number;
+    profileUrl?: string;
+    department?: string
+    role?: Role
+    rank?: Rank
+}
 export interface IUser {
-    _id:string
+    _id?:string
     firstName: string;
     lastName: string;
     fatherName: string;

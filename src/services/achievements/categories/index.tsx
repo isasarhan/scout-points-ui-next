@@ -4,7 +4,7 @@ import { IAchievemntCategory } from '@/types/achievemntCategory';
 
 const useAchievementCategory = ({ token }: { token: string | undefined }) => {
     const instance = httpService.instance
-    let url = `/achievements-categories`;
+    const url = `/achievements-categories`;
     const getAll = async () => {
         if (!token) return
         return httpService.assignToken(token) ? await instance.get(`${url}`).then((res) => {

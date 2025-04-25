@@ -4,7 +4,7 @@ import { IAddEvent } from '@/types/event';
 
 const useEvents = ({ token }: { token: string | undefined }) => {
     const instance = httpService.instance
-    let url = `/events`;
+    const url = `/events`;
 
     const getAll = async (department?: string) => {
         const params = department ? {department} : {} 

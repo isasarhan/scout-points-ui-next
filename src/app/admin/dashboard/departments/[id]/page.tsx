@@ -1,7 +1,5 @@
 import React, { FC } from 'react';
-export interface DepartmentPageProps {
-  height: number;
-}
+export interface DepartmentPageProps {}
 const DepartmentPage: FC<DepartmentPageProps> = () => {
   return (
     <div>

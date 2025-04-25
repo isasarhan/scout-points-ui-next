@@ -4,7 +4,7 @@ import axios from "axios";
 
 const useUsers = ({ token }: { token: string | undefined }) => {
     const instance = httpService.instance
-    let url = `/users`;
+    const url = `/users`;
     const getAll = async (department?: string) => {
         if (!token) return
         const params = department ? { department } : {}

@@ -41,10 +41,9 @@ export default function MultiStepForm() {
             department: "",
         },
     })
-    console.log('errors',form.formState.errors);
     
     const onSubmit: SubmitHandler<FormData> = async (data) => {
-        await register(data).then((res) => console.log('success')).catch((e)=>console.log(e))
+        await register(data).then(() => console.log('success')).catch((e)=>console.log(e))
     }
 
     const currentStepFields = steps[step].fields
