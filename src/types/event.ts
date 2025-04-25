@@ -31,6 +31,7 @@ export interface IAddEvent {
     startDate: string;
     endDate?: string;
     manager?: string
+    timeRange: TimeRangeValue
     departments?: string[]
     attendees?: IAddAttendee[];
 }
@@ -42,6 +43,17 @@ export interface IEvent {
     startDate: string;
     endDate?: string;
     manager?: Partial<IUser>
+    timeRange: TimeRangeValue
     departments?: Partial<IDepartment>[]
     attendees: IAttendee[];
+}
+export type TimeValue = {
+    hour: string
+    minute: string
+    period: "AM" | "PM"
+}
+
+export type TimeRangeValue = {
+    startTime: TimeValue
+    endTime: TimeValue
 }

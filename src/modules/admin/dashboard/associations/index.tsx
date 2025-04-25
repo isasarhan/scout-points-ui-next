@@ -30,9 +30,9 @@ const AssociationsModule: FC<AssociationsModuleProps> = ({associations=[]}) => {
         {
             label: 'View More',
             value: '_id',
-            render: (value)=>(
+            render: (value:IAssociation)=>(
                 <div className='flex justify-center items-center w-full'>
-                    <Link href={`/admin/dashboard/users/${value}`}><ViewIcon size={20}/> </Link>
+                    <Link href={`/admin/dashboard/users/${value._id}`}><ViewIcon size={20}/> </Link>
                 </div>
             )
         },

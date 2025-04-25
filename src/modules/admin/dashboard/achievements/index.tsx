@@ -19,8 +19,9 @@ const AchievementsModule: FC<AchievementsModuleProps> = ({ achievements }) => {
     {
       label: 'Deadline',
       value: 'deadline',
-      render: (value) => {
-        return dateFormatter(value)
+      render: (value:IAchievement) => {
+        if(!value.deadline) return 'N/A'
+        return dateFormatter(value.deadline)
       }
     },
     {
@@ -30,9 +31,9 @@ const AchievementsModule: FC<AchievementsModuleProps> = ({ achievements }) => {
     {
       label: 'View More',
       value: '_id',
-      render: (value) => (
+      render: (value:IAchievement) => (
         <div className='flex justify-center items-center w-full'>
-          <Link href={`/admin/dashboard/achievements/${value}`}><ViewIcon size={20} /> </Link>
+          <Link href={`/admin/dashboard/achievements/${value._id}`}><ViewIcon size={20} /> </Link>
         </div>
       )
     },

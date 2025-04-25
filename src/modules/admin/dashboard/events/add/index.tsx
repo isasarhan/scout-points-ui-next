@@ -1,23 +1,22 @@
 'use client'
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useState } from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import DatePicker from "@/components/datepicker";
+import { Form } from "@/components/ui/form";
 import { IDepartment } from "@/types/department";
-import { Textarea } from "@/components/ui/textarea";
 import { EventType } from "@/types/event";
 import { addEventSchema } from "../validation";
 import { toast } from "sonner";
 import { useUserContext } from "@/providers/UserProvider";
 import useEvents from "@/services/events";
-import { TimeRangePicker } from "@/components/ui/time-range-picker";
-import { MultiSelect } from "@/components/ui/multi-select";
+import FormInput from "@/components/common/form/input";
+import FormDatePicker from "@/components/common/form/datePicker";
+import FormTimeRange from "@/components/common/form/timeRange";
+import FormSelect from "@/components/common/form/select";
+import FormMultiSelect from "@/components/common/form/multiSelect";
+import FormTextArea from "@/components/common/form/textarea";
 
 
 
@@ -63,139 +62,66 @@ export default function AddEventModule({ departments }: { departments: IDepartme
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <CardContent className="space-y-4">
                         <div className="flex items-center w-full gap-4">
-                            <FormField
+                            <FormInput
                                 control={form.control}
                                 name="name"
-                                render={({ field }) => (
-                                    <FormItem className="flex-1">
-                                        <FormLabel>Name</FormLabel>
-                                        <FormControl>
-                                            <Input placeholder="Enter Name" {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                title='Name'
+                                placeholder="Enter name"
                             />
-                            <FormField
+
+                            <FormDatePicker
                                 control={form.control}
                                 name="startDate"
-                                render={({ field }) => (
-                                    <FormItem className="flex-1">
-                                        <FormLabel>Start Date</FormLabel>
-                                        <FormControl>
-                                            <DatePicker {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                title='Start Date'
                             />
-                            <FormField
+                            <FormTimeRange
                                 control={form.control}
                                 name="timeRange"
-                                render={({ field }) => (
-                                    <FormItem className="flex-1 ">
-                                        <FormLabel>Meeting Time Range</FormLabel>
-                                        <FormControl>
-                                            <TimeRangePicker value={field.value} onChange={field.onChange} />
-                                        </FormControl>
-                                    </FormItem>
-                                )}
+                                title='Meeting Time Range'
+
                             />
-                            <FormField
+
+                            <FormDatePicker
                                 control={form.control}
                                 name="endDate"
-                                render={({ field }) => (
-                                    <FormItem className="flex-1">
-                                        <FormLabel>End Date</FormLabel>
-                                        <FormControl>
-                                            <DatePicker {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                title='End Date'
                             />
 
                         </div>
                         <div className='flex items-center w-full gap-4'>
-                            <FormField
+                            <FormInput
                                 control={form.control}
                                 name="location"
-                                render={({ field }) => (
-                                    <FormItem className="flex-1">
-                                        <FormLabel>Location</FormLabel>
-                                        <FormControl>
-                                            <Input placeholder="Enter Location" {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                title='Location'
+                                placeholder="Enter Location"
                             />
-                            <FormField
+                            <FormSelect
                                 control={form.control}
                                 name="type"
-                                render={({ field }) => (
-                                    <FormItem className="flex-1">
-                                        <FormLabel>Type</FormLabel>
-                                        <FormControl>
-                                            <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                                <FormControl>
-                                                    <SelectTrigger>
-                                                        <SelectValue placeholder="Select Role" />
-                                                    </SelectTrigger>
-                                                </FormControl>
-                                                <SelectContent>
-                                                    {Object.values(EventType).map((type) => (
-                                                        <SelectItem key={type} value={type}>
-                                                            {type}
-                                                        </SelectItem>
-                                                    ))}
-                                                </SelectContent>
-                                            </Select>
-                                        </FormControl>
-                                    </FormItem>
-                                )}
+                                title='Type'
+                                placeholder="Select Role"
+                                options={Object.values(EventType).map((type) => ({
+                                    label: type,
+                                    value: type
+                                }))}
                             />
-  
-                            <FormField
+                            <FormMultiSelect
                                 control={form.control}
                                 name="departments"
-                                render={({ }) => (
-                                    <FormItem className="flex-1">
-                                        <FormLabel>Department</FormLabel>
-                                        <FormControl>
-                                            <Controller
-                                                control={form.control}
-                                                name="departments"
-                                                render={({ field }) => (
-                                                    <MultiSelect
-                                                        options={departments}
-                                                        selected={field.value}
-                                                        onChange={field.onChange}
-                                                        placeholder="Select departments..."
-                                                    />
-                                                )}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                title='Departments'
+                                placeholder="Select departments..."
+                                options={departments}
                             />
 
                         </div>
                         <div>
-                            <FormField
+                            <FormTextArea
                                 control={form.control}
                                 name="description"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Description</FormLabel>
-                                        <FormControl>
-                                            <Textarea rows={3} placeholder="Enter description (optional)" {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                title='Description'
+                                placeholder="Enter description (optional)"
                             />
+
                         </div>
                     </CardContent>
                     <CardFooter>

@@ -26,19 +26,20 @@ const AllDepartmentsModule: FC<AllDepartmentsModuleProps> = ({ departments }) =>
         {
             label: 'Status',
             value: 'status',
-            render: (value) => (
-                <div className={`${value === 'active' ? 'bg-green-600' : 'bg-red-500'}
-                 text-white cursor-pointer flex justify-center p-2 rounded-full w-min`}>
-                    {value}
+            render: (value:IDepartment) => (
+                <div className={`text-white cursor-pointer flex justify-center `}>
+                    <div className={`${value.status === 'active' ? 'bg-green-600' : 'bg-red-500'}  p-2 rounded-full`}>
+                    {value.status}
+                    </div>
                 </div>
             )
         },
         {
             label: 'View More',
             value: '_id',
-            render: (value) => (
+            render: (value:IDepartment) => (
                 <div className='flex justify-center items-center w-full'>
-                    <Link href={`/admin/dashboard/users/${value}`}><ViewIcon size={20} /> </Link>
+                    <Link href={`/admin/dashboard/users/${value._id}`}><ViewIcon size={20} /> </Link>
                 </div>
             )
         },

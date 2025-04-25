@@ -33,8 +33,6 @@ export function MultiSelect({
   badgeClassName,
 }: MultiSelectProps) {
   const [open, setOpen] = React.useState(false)
-  console.log('selected', selected);
-  console.log('options', options);
   
   const handleUnselect = (value: string) => {
     onChange(selected.filter((item) => item !== value))

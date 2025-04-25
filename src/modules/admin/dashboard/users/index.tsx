@@ -10,8 +10,6 @@ export interface UsersModuleProps {
     users: IUser[];
 }
 const UsersModule: FC<UsersModuleProps> = ({ users = [] }) => {
-    console.log('users', users);
-
     const column: Column[] = [
         {
             label: 'First Name',
@@ -32,25 +30,25 @@ const UsersModule: FC<UsersModuleProps> = ({ users = [] }) => {
         {
             label: 'Rank',
             value: 'rank',
-            render: (value) => (
-                <Badge variant="outline" className={getRankColor(value)}>{value}</Badge>
+            render: (value:IUser) => (
+                <Badge variant="outline" className={getRankColor(value.rank)}>{value.rank}</Badge>
             )
         },
         {
             label: 'Department',
             value: 'department',
-            render: (value) => (
+            render: (value:IUser) => (
                 <div className=''>
-                    {value?.name}
+                    {value?.department?.name}
                 </div>
             )
         },
         {
             label: 'View More',
             value: '_id',
-            render: (value) => (
+            render: (value:IUser) => (
                 <div className='flex justify-center items-center w-full'>
-                    <Link href={`/admin/dashboard/users/${value}`}><ViewIcon size={20} /> </Link>
+                    <Link href={`/admin/dashboard/users/${value._id}`}><ViewIcon size={20} /> </Link>
                 </div>
             )
         },

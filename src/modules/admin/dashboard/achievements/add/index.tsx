@@ -20,6 +20,11 @@ import { toast } from 'sonner';
 import { Level } from '@/types/achievement';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Delete, DeleteIcon, X } from 'lucide-react';
+import FormInput from '@/components/common/form/input';
+import FormDatePicker from '@/components/common/form/datePicker';
+import FormMultiSelect from '@/components/common/form/multiSelect';
+import FormSelect from '@/components/common/form/select';
+import FormTextArea from '@/components/common/form/textarea';
 
 export interface AddAchievementModuleProps {
     departments: IDepartment[]
@@ -67,139 +72,64 @@ const AddAchievementModule: FC<AddAchievementModuleProps> = ({ departments, cate
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <CardContent className="space-y-4">
                         <div className="flex items-center w-full gap-4">
-                            <FormField
+                            <FormInput
                                 control={form.control}
                                 name="title"
-                                render={({ field }) => (
-                                    <FormItem className="flex-1">
-                                        <FormLabel>Title</FormLabel>
-                                        <FormControl>
-                                            <Input placeholder="Enter Title" {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                title='Title'
+                                placeholder="Enter Title"
                             />
-                            <FormField
+
+                            <FormDatePicker
                                 control={form.control}
                                 name="deadline"
-                                render={({ field }) => (
-                                    <FormItem className="flex-1">
-                                        <FormLabel>Deadline</FormLabel>
-                                        <FormControl>
-                                            <DatePicker {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                title='Deadline'
                             />
-                            <FormField
+
+                            <FormInput
                                 control={form.control}
                                 name="points"
-                                render={({ field }) => (
-                                    <FormItem className="flex-1">
-                                        <FormLabel>Points</FormLabel>
-                                        <FormControl>
-                                            <Input placeholder="Enter Points" type='number' {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                title='Points'
+                                placeholder="Enter Points"
                             />
+
                         </div>
                         <div className='flex items-center w-full gap-4'>
-                            <FormField
+                            <FormMultiSelect
                                 control={form.control}
                                 name="departments"
-                                render={({ field }) => (
-                                    <FormItem className="flex-1">
-                                        <FormLabel>departments</FormLabel>
-                                        <FormControl>
-                                            <Controller
-                                                control={form.control}
-                                                name="departments"
-                                                render={({ field }) => (
-                                                    <MultiSelect
-                                                        options={departments}
-                                                        selected={field.value || []}
-                                                        onChange={field.onChange}
-                                                        placeholder="Select technologies..."
-                                                    />
-                                                )}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                title='Departments'
+                                placeholder="Select technologies..."
+                                options={departments}
                             />
-                            <FormField
+                            <FormMultiSelect
                                 control={form.control}
                                 name="categories"
-                                render={({ field }) => (
-                                    <FormItem className="flex-1">
-                                        <FormLabel>categories</FormLabel>
-                                        <FormControl>
-                                            <Controller
-                                                control={form.control}
-                                                name="categories"
-                                                render={({ field }) => (
-                                                    <MultiSelect
-                                                        options={categories}
-                                                        selected={field.value}
-                                                        onChange={field.onChange}
-                                                        placeholder="Select technologies..."
-                                                    />
-                                                )}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                title='Categories'
+                                placeholder="Select categories..."
+                                options={categories}
                             />
-                            <FormField
+                            <FormSelect
                                 control={form.control}
                                 name="level"
-                                render={({ field }) => (
-                                    <FormItem className="flex-1">
-                                        <FormLabel>Level</FormLabel>
-                                        <FormControl>
-                                            <Select onValueChange={field.onChange} defaultValue={field.value}>
-
-                                                <FormControl>
-                                                    <SelectTrigger>
-                                                        <SelectValue placeholder="Select level" />
-                                                    </SelectTrigger>
-                                                </FormControl>
-                                                <SelectContent>
-                                                    {Object.values(Level).map((level) => (
-                                                        <SelectItem key={level} value={level}>
-                                                            {level}
-                                                        </SelectItem>
-                                                    ))}
-                                                </SelectContent>
-                                            </Select>
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                title='Level'
+                                placeholder="Select level"
+                                options={Object.values(Level).map((level) => ({
+                                    label: level,
+                                    value: level
+                                }))}
                             />
+
                         </div>
                         <div className="space-y-2">
                             <FormLabel>Requirements</FormLabel>
                             {fields.map((field, index) => (
                                 <div key={field.id} className="flex gap-2 items-baseline">
-                                    <FormField
-                                        control={control}
+                                    <FormInput
+                                        control={form.control}
                                         name={`requirements.${index}.value`}
-                                        render={({ field }) => (
-                                            <FormItem className="flex-1">
-                                                <FormControl>
-                                                    <Input placeholder="Enter requirement" {...field} />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
+                                        placeholder="Enter requirement"
                                     />
+
                                     <Button
                                         type="button"
                                         variant="destructive"
@@ -220,19 +150,13 @@ const AddAchievementModule: FC<AddAchievementModuleProps> = ({ departments, cate
                         </div>
 
                         <div>
-                            <FormField
+                            <FormTextArea
                                 control={form.control}
                                 name="description"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Description</FormLabel>
-                                        <FormControl>
-                                            <Textarea rows={3} placeholder="Enter description (optional)" {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                title='Description'
+                                placeholder="Enter description (optional)"
                             />
+
                         </div>
                     </CardContent>
                     <CardFooter>

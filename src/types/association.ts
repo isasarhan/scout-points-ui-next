@@ -1,4 +1,5 @@
 export interface IAssociation{
+    _id?:string
     name: string;
     type: EnumAssociationType;
     description?: string;

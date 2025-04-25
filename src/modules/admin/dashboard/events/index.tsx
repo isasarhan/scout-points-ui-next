@@ -12,8 +12,6 @@ export interface EventsModuleProps {
 }
 
 const EventsModule: FC<EventsModuleProps> = ({ events }) => {
-    console.log(events);
-    
     const column: Column[] = [
         {
             label: 'Type',
@@ -26,41 +24,41 @@ const EventsModule: FC<EventsModuleProps> = ({ events }) => {
         {
             label: 'Start Date',
             value: 'startDate',
-            render: (value) => {
-                return dateFormatter(value)
+            render: (value: IEvent) => {
+                return dateFormatter(value.startDate)
             }
         },
         {
             label: 'End Date',
             value: 'endDate',
-            render: (value) => {
-                if(!value) return 'N/A'
-                return dateFormatter(value)
+            render: (value: IEvent) => {
+                if (!value.endDate) return 'N/A'
+                return dateFormatter(value.endDate)
             }
         },
         {
             label: 'Time Range',
             value: 'timeRange',
-            render: (value) => {
-                if(!value) return 'N/A'
-                return formatTimeRange(value)
+            render: (value: IEvent) => {
+                if (!value.timeRange) return 'N/A'
+                return formatTimeRange(value.timeRange)
             }
         },
         {
             label: 'Attendees',
             value: 'attendees',
-            render: (value) => (
+            render: (value: IEvent) => (
                 <div className=''>
-                    {value.length}
+                    {value.attendees.length}
                 </div>
             )
         },
         {
             label: 'View More',
             value: '_id',
-            render: (value) => (
+            render: (value: IEvent) => (
                 <div className='flex justify-center items-center w-full'>
-                    <Link href={`/admin/dashboard/events/${value}`}><ViewIcon size={20} /> </Link>
+                    <Link href={`/admin/dashboard/events/${value._id}`}><ViewIcon size={20} /> </Link>
                 </div>
             )
         },

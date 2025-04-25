@@ -12,6 +12,8 @@ import useAchievementCategory from '@/services/achievements/categories';
 import { useUserContext } from '@/providers/UserProvider';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
+import FormInput from '@/components/common/form/input';
+import FormTextArea from '@/components/common/form/textarea';
 
 export interface AddAchievementsCategoriesModuleProps { }
 
@@ -23,12 +25,12 @@ const AddAchievementsCategoriesModule: FC<AddAchievementsCategoriesModuleProps> 
         mode: "onBlur",
         resolver: zodResolver(AddCategoriesSchema),
     });
-    const { handleSubmit, formState:{errors} } = form;
+    const { handleSubmit, formState: { errors } } = form;
 
     type CategoryType = z.infer<typeof AddCategoriesSchema>;
 
     const onSubmit = async (data: CategoryType) => {
-        
+
         try {
             await add(data);
             toast.success("Achievement category added successfully!");
@@ -49,32 +51,20 @@ const AddAchievementsCategoriesModule: FC<AddAchievementsCategoriesModuleProps> 
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <CardContent className="space-y-4">
                         <div className="flex flex-col w-full gap-4">
-                            <FormField
+                            <FormInput
                                 control={form.control}
                                 name="name"
-                                render={({ field }) => (
-                                    <FormItem className="flex-1">
-                                        <FormLabel>Name</FormLabel>
-                                        <FormControl>
-                                            <Input placeholder="Enter category name" {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                title='Name'
+                                placeholder="Enter category name"
                             />
-                            <FormField
+
+                            <FormTextArea
                                 control={form.control}
                                 name="description"
-                                render={({ field }) => (
-                                    <FormItem className="flex-1">
-                                        <FormLabel>Description</FormLabel>
-                                        <FormControl>
-                                            <Input placeholder="Enter category description" {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                title='Description'
+                                placeholder="Enter description (optional)"
                             />
+
                         </div>
                     </CardContent>
                     <CardFooter>

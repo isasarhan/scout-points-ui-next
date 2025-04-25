@@ -28,7 +28,7 @@ const TableComp: FC<TablePropsComp> = ({ data, column, caption }) => {
                     data.map((v, index) => (
                         <TableRow className='p-0 text-center' key={`table-index-${index}`}>
                             {column.map((col, colIndx) => (
-                                <TableCell className='p-4 text-center' key={`table-col-index-${colIndx}`}>{col.render ? col.render(v[col.value]) : v[col.value]}</TableCell>
+                                <TableCell className='p-4 text-center' key={`table-col-index-${colIndx}`}>{col.render ? col.render(v) : v[col.value]}</TableCell>
                             ))}
                         </TableRow>
                     ))

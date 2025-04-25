@@ -5,10 +5,5 @@ export function middleware(request: NextRequest) {
 
     if (!currentUser && request.nextUrl.pathname.includes('/dashboard'))
         return Response.redirect(new URL('/login', request.url))
-    
-    
-    // if (currentUser && request.nextUrl.pathname.startsWith('/dashboard'))
-    //     return Response.redirect(new URL('/dashboard', request.url))
-    
-    
+
 }

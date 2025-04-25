@@ -37,6 +37,8 @@ import { Rank, Role } from "@/types/user";
 import { IDepartment } from "@/types/department";
 import useUsers from "@/services/users";
 import { toast } from "sonner";
+import FormInput from "@/components/common/form/input";
+import FormSelect from "@/components/common/form/select";
 
 export interface AddUserModuleProps {
     departments: IDepartment[];
@@ -73,103 +75,55 @@ const AddUserModule: FC<AddUserModuleProps> = ({ departments }) => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <CardContent className="space-y-4">
                         <div className="flex items-center w-full gap-4">
-                            <FormField
+                            <FormInput
                                 control={form.control}
                                 name="firstName"
-                                render={({ field }) => (
-                                    <FormItem className="flex-1">
-                                        <FormLabel>First Name</FormLabel>
-                                        <FormControl>
-                                            <Input placeholder="Enter user first name" {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                title='First Name'
+                                placeholder="Enter user first name"
                             />
-                            <FormField
+
+                            <FormInput
                                 control={form.control}
                                 name="lastName"
-                                render={({ field }) => (
-                                    <FormItem className="flex-1">
-                                        <FormLabel>Last Name</FormLabel>
-                                        <FormControl>
-                                            <Input placeholder="Enter user last name" {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                title='Last Name'
+                                placeholder="Enter user last name"
                             />
-                            <FormField
+                            <FormInput
                                 control={form.control}
                                 name="fatherName"
-                                render={({ field }) => (
-                                    <FormItem className="flex-1">
-                                        <FormLabel>Father Name</FormLabel>
-                                        <FormControl>
-                                            <Input placeholder="Enter father first name" {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                title='Father Name'
+                                placeholder="Enter father first name"
                             />
-                            <FormField
+
+                            <FormInput
                                 control={form.control}
                                 name="motherName"
-                                render={({ field }) => (
-                                    <FormItem className="flex-1">
-                                        <FormLabel>Mother Name</FormLabel>
-                                        <FormControl>
-                                            <Input placeholder="Enter mother full name" {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                title='Mother Name'
+                                placeholder="Enter mother full name"
                             />
+
                         </div>
                         <div className="flex items-center w-full gap-4">
-                            <FormField
+                            <FormInput
                                 control={form.control}
                                 name="email"
-                                render={({ field }) => (
-                                    <FormItem className="flex-1">
-                                        <FormLabel>Email</FormLabel>
-                                        <FormControl>
-                                            <Input placeholder="Enter email" {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                title='Email'
+                                placeholder="Enter email"
                             />
-                            <FormField
+                            <FormInput
                                 control={form.control}
                                 name="password"
-                                render={({ field }) => (
-                                    <FormItem className="flex-1">
-                                        <FormLabel>Password</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                placeholder="Enter email"
-                                                type="password"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                title='Password'
+                                placeholder="Enter password"
+                                type="password"
                             />
-                            <FormField
+                            <FormInput
                                 control={form.control}
                                 name="phone"
-                                render={({ field }) => (
-                                    <FormItem className="flex-1">
-                                        <FormLabel>Phone</FormLabel>
-                                        <FormControl>
-                                            <Input placeholder="Enter phone" {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                title='Phone'
+                                placeholder="Enter phone"
                             />
+
                             <FormField
                                 control={form.control}
                                 name="nationality"
@@ -191,101 +145,49 @@ const AddUserModule: FC<AddUserModuleProps> = ({ departments }) => {
                         </div>
 
                         <div className="grid grid-cols-4 gap-4">
-                            <FormField
+                            <FormSelect
                                 control={form.control}
                                 name="role"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Role</FormLabel>
-                                        <FormControl>
-                                            <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                                <FormControl>
-                                                    <SelectTrigger>
-                                                        <SelectValue placeholder="Select Role" />
-                                                    </SelectTrigger>
-                                                </FormControl>
-                                                <SelectContent>
-                                                    {Object.values(Role).map((role) => (
-                                                        <SelectItem key={role} value={role}>
-                                                            {role}
-                                                        </SelectItem>
-                                                    ))}
-                                                </SelectContent>
-                                            </Select>
-                                        </FormControl>
-                                    </FormItem>
-                                )}
-                            />
-                            <FormField
-                                control={form.control}
-                                name="rank"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Rank</FormLabel>
-                                        <FormControl>
-                                            <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                                <FormControl>
-                                                    <SelectTrigger>
-                                                        <SelectValue placeholder="Select Rank" />
-                                                    </SelectTrigger>
-                                                </FormControl>
-                                                <SelectContent>
-                                                    {Object.values(Rank).map((rank) => (
-                                                        <SelectItem key={rank} value={rank}>
-                                                            {rank}
-                                                        </SelectItem>
-                                                    ))}
-                                                </SelectContent>
-                                            </Select>
-                                        </FormControl>
-                                    </FormItem>
-                                )}
+                                title='Role'
+                                placeholder="Select Role"
+                                options={Object.values(Role).map((type) => ({
+                                    label: type,
+                                    value: type
+                                }))}
                             />
 
-                            <FormField
+                            <FormSelect
+                                control={form.control}
+                                name="rank"
+                                title='Rank'
+                                placeholder="Select Rank"
+                                options={Object.values(Rank).map((type) => ({
+                                    label: type,
+                                    value: type
+                                }))}
+                            />
+                            <FormSelect
                                 control={form.control}
                                 name="department"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Department</FormLabel>
-                                        <FormControl>
-                                            <Select
-                                                onValueChange={field.onChange}
-                                                defaultValue={field.value}>
-                                                <FormControl>
-                                                    <SelectTrigger>
-                                                        <SelectValue placeholder="Select Department" />
-                                                    </SelectTrigger>
-                                                </FormControl>
-                                                <SelectContent>
-                                                    {departments.map((department) => (
-                                                        <SelectItem value={department._id}>
-                                                            {department.name}
-                                                        </SelectItem>
-                                                    ))}
-                                                </SelectContent>
-                                            </Select>
-                                        </FormControl>
-                                    </FormItem>
-                                )}
+                                title='Department'
+                                placeholder="Select Department"
+                                options={departments.map((department) => ({
+                                    label: department.name,
+                                    value: department._id
+                                }))}
                             />
+
                         </div>
 
                         <p className="text-2xl font-bold">Address</p>
                         <div className="flex items-center w-full gap-4">
-                            <FormField
+                            <FormInput
                                 control={form.control}
                                 name="address.city"
-                                render={({ field }) => (
-                                    <FormItem className="flex-1">
-                                        <FormLabel>City</FormLabel>
-                                        <FormControl>
-                                            <Input placeholder="Enter address" {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                title='City'
+                                placeholder="Enter city"
                             />
+
                             <FormField
                                 control={form.control}
                                 name="address.country"
@@ -307,45 +209,26 @@ const AddUserModule: FC<AddUserModuleProps> = ({ departments }) => {
                         </div>
 
                         <div className="flex items-center w-full gap-4">
-                            <FormField
+                            <FormInput
                                 control={form.control}
                                 name="address.building"
-                                render={({ field }) => (
-                                    <FormItem className="flex-1">
-                                        <FormLabel>Postal Code</FormLabel>
-                                        <FormControl>
-                                            <Input placeholder="Enter building" {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                title='Postal Code'
+                                placeholder="Enter building"
                             />
-                            <FormField
+                            <FormInput
                                 control={form.control}
                                 name="address.street"
-                                render={({ field }) => (
-                                    <FormItem className="flex-1">
-                                        <FormLabel>Street</FormLabel>
-                                        <FormControl>
-                                            <Input placeholder="Enter street" {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                title='Street'
+                                placeholder="Enter street"
                             />
-                            <FormField
+
+                            <FormInput
                                 control={form.control}
                                 name="address.floor"
-                                render={({ field }) => (
-                                    <FormItem className="flex-1">
-                                        <FormLabel>Street</FormLabel>
-                                        <FormControl>
-                                            <Input placeholder="Enter postal code" {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                title='Floor'
+                                placeholder="Enter floor"
                             />
+
                         </div>
                     </CardContent>
                     <CardFooter>

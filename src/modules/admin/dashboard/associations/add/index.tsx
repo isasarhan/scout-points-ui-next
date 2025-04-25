@@ -16,6 +16,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { EnumAssociationType } from '@/types/association';
+import FormInput from '@/components/common/form/input';
+import FormSelect from '@/components/common/form/select';
+import FormTextArea from '@/components/common/form/textarea';
 
 export interface AddAssociationModuleProps { }
 
@@ -53,71 +56,35 @@ const AddAssociationModule: FC<AddAssociationModuleProps> = () => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <CardContent className="space-y-4">
                         <div className="flex flex-col w-full gap-4">
-                            <FormField
+                            <FormInput
                                 control={form.control}
                                 name="name"
-                                render={({ field }) => (
-                                    <FormItem className="flex-1">
-                                        <FormLabel>Name</FormLabel>
-                                        <FormControl>
-                                            <Input placeholder="Enter association name" {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                title='Name'
+                                placeholder="Enter association name"
                             />
-                            <FormField
+                            <FormInput
                                 control={form.control}
                                 name="website"
-                                render={({ field }) => (
-                                    <FormItem className="flex-1">
-                                        <FormLabel>Website</FormLabel>
-                                        <FormControl>
-                                            <Input placeholder="Enter association website" {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                title='Website'
+                                placeholder="Enter association website"
                             />
-                            <FormField
+                            <FormSelect
                                 control={form.control}
                                 name="type"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Type</FormLabel>
-                                        <FormControl>
-                                            <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                                <FormControl>
-                                                    <SelectTrigger>
-                                                        <SelectValue placeholder="Select Type" />
-                                                    </SelectTrigger>
-                                                </FormControl>
-                                                <SelectContent>
-                                                    {Object.values(EnumAssociationType).map((type) => (
-                                                        <SelectItem key={type} value={type}>
-                                                            {type}
-                                                        </SelectItem>
-                                                    ))}
-                                                </SelectContent>
-                                            </Select>
-
-                                        </FormControl>
-                                    </FormItem>
-                                )}
+                                title='Type'
+                                placeholder="Select Type"
+                                options={Object.values(EnumAssociationType).map((type) => ({
+                                    label: type,
+                                    value: type
+                                }))}
                             />
-                            <FormField
+                            <FormTextArea
                                 control={form.control}
                                 name="description"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Description</FormLabel>
-                                        <FormControl>
-                                            <Textarea rows={3} placeholder="Enter description (optional)" {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                title='Description'
+                                placeholder="Enter description (optional)"
                             />
+
                         </div>
                     </CardContent>
                     <CardFooter>
