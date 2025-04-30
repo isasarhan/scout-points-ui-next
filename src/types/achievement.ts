@@ -1,3 +1,16 @@
+import { Rank } from "./user";
+
+export enum Status {
+    Pending = 'pending',
+    Complete = 'complete',
+    Available = 'available',
+}
+
+export interface IAchievementRequest {
+    user: string
+    achievement: string
+    status?: Status;
+}
 export interface IAchievement {
     _id?: string
     title: string;
@@ -10,6 +23,7 @@ export interface IAchievement {
     points: number
     requirements?: string[]
     level: Level;
+    rank?: Rank;
 }
 export enum Level {
     BEGINNER = "beginner",

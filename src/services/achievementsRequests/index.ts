@@ -1,10 +1,10 @@
-import { IAchievement } from '@/types/achievement';
+import { IAchievementRequest } from '@/types/achievement';
 import httpService from '../axios';
 import axios from "axios";
 
-const useAchievements = ({ token }: { token: string | undefined }) => {
+const useAchievementRequests = ({ token }: { token: string | undefined }) => {
     const instance = httpService.instance
-    const url = `/achievements`;
+    const url = `/achievement-requests`;
 
     const getAll = async (query?: Record<string, any>) => {
         if (!token) return;
@@ -16,7 +16,7 @@ const useAchievements = ({ token }: { token: string | undefined }) => {
             return res.data;
         } catch (e) {
             console.error(e);
-            throw new Error("Failed to fetch achievements");
+            throw new Error("Failed to fetch achievement requests");
         }
     }
 
@@ -27,7 +27,7 @@ const useAchievements = ({ token }: { token: string | undefined }) => {
         }).catch((e) => console.log(e)) : null
     };
 
-    const add = async (achievement: IAchievement) => {
+    const add = async (achievement: IAchievementRequest) => {
         if (!token) return;
     
         if (!httpService.assignToken(token)) return null;
@@ -53,4 +53,4 @@ const useAchievements = ({ token }: { token: string | undefined }) => {
     return { getById, getAll, add };
 }
 
-export default useAchievements;
+export default useAchievementRequests;

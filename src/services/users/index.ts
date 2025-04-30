@@ -5,16 +5,19 @@ import axios from "axios";
 const useUsers = ({ token }: { token: string | undefined }) => {
     const instance = httpService.instance
     const url = `/users`;
-    const getAll = async (department?: string) => {
-        if (!token) return
-        const params = department ? { department } : {}
-        return httpService.assignToken(token) ? await instance.get(`${url}`, { params }).then((res) => {
-            return res.data
-        }).catch((e) => {
-            console.log(e)
-            throw new Error(e)
-        }) : null
-    };
+    const getAll = async (query?: Record<string, any>) => {
+        if (!token) return;
+
+        if (!httpService.assignToken(token)) return null;
+
+        try {
+            const res = await instance.get(url, { params: query });
+            return res.data;
+        } catch (e) {
+            console.error(e);
+            throw new Error("Failed to fetch users");
+        }
+    }
 
     const getById = async (id: string) => {
         if (!token) return

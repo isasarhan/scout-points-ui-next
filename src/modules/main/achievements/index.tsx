@@ -2,26 +2,46 @@
 import AchievementCard from '@/components/achievement-card';
 import Dropdown from '@/components/dropdown';
 import SearchInput from '@/components/search-input';
-import { IAchievement } from '@/types/achievement';
+import { IAchievement, IAchievementRequest, Status } from '@/types/achievement';
 import { IAchievemntCategory } from '@/types/achievemntCategory';
 import React, { FC, useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { Check, Clock } from 'lucide-react';
+import { useUserContext } from '@/providers/UserProvider';
+import useAchievementRequests from '@/services/achievementsRequests';
+import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 export interface AchievementsModuleProps {
     achievemnts: IAchievement[]
     categories: IAchievemntCategory[]
+    requests: IAchievementRequest[]
 }
 
-const AchievementsModule: FC<AchievementsModuleProps> = ({ achievemnts, categories }) => {
+const AchievementsModule: FC<AchievementsModuleProps> = ({ achievemnts, categories, requests }) => {
+    const { user, token } = useUserContext()
+    const { add } = useAchievementRequests({ token: token })
+    const router = useRouter()
     const [category, setCategory] = useState('')
     const [searchTerm, setSearchTerm] = useState('');
     const [activeTab, setActiveTab] = useState('available');
-    const [completedList, setCompletedList] = useState<IAchievement[]>(achievemnts.map((achievemnt)=>achievemnt.));
-    const [pendingList, setPendingList] = useState<IAchievement[]>(achievemnts);
-    const [availableList, setAvailableList] = useState<IAchievement[]>(achievemnts);
+    const [completedList, setCompletedList] = useState<IAchievement[]>(achievemnts.filter((achievemnt) =>
+        requests.some((req) => req.achievement === achievemnt._id && req.status === Status.Complete)
+    ));
+    const [pendingList, setPendingList] = useState<IAchievement[]>(achievemnts.filter((achievemnt) =>
+        requests.some((req) => req.achievement === achievemnt._id && req.status === Status.Pending)
+    ));
+    const [availableList, setAvailableList] = useState<IAchievement[]>(achievemnts.filter((achievemnt) =>
+        !requests.some((req) => req.achievement === achievemnt._id)
+    ));
 
+    const handleRequestAchievement = async (id: string) => {
+        await add({ achievement: id, user: user?._id!, status: Status.Pending }).then(()=>{
+            toast.success("Achievement Added!")
+            router.refresh()
+        })
+    }
 
     const filterAchievements = (achievementList: IAchievement[]) => {
         return achievementList.filter(achievement => {
@@ -106,7 +126,7 @@ const AchievementsModule: FC<AchievementsModuleProps> = ({ achievemnts, categori
                             <AchievementCard
                                 key={achievement._id}
                                 achievement={achievement}
-                                onApply={() => handleApplyForAchievement(achievement)}
+                                onApply={() => handleRequestAchievement(achievement._id!)}
                             />
                         ))}
                     </div>
@@ -121,7 +141,7 @@ const AchievementsModule: FC<AchievementsModuleProps> = ({ achievemnts, categori
                             <h3 className="text-xl font-medium mb-2">No pending achievements</h3>
                             <p className="text-muted-foreground">
                                 {/* {searchTerm || categoryFilter !== 'all' || levelFilter !== 'all' */}
-                                {searchTerm 
+                                {searchTerm
                                     ? "Try adjusting your filters to see more achievements."
                                     : "You don't have any achievements pending approval."}
                             </p>
@@ -147,7 +167,7 @@ const AchievementsModule: FC<AchievementsModuleProps> = ({ achievemnts, categori
                             </div>
                             <h3 className="text-xl font-medium mb-2">No completed achievements</h3>
                             <p className="text-muted-foreground">
-                                {searchTerm 
+                                {searchTerm
                                     ? "Try adjusting your filters to see more achievements."
                                     : "You haven't completed any achievements yet."}
                             </p>

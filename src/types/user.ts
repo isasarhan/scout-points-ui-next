@@ -9,7 +9,7 @@ interface Address {
 }
 
 export interface IAddUser {
-    _id?:string
+    _id?: string
     firstName: string;
     lastName: string;
     fatherName: string;
@@ -25,7 +25,7 @@ export interface IAddUser {
     isSuperAdmin?: boolean;
     role?: Role
 }
-export interface IAddUser{
+export interface IAddUser {
     firstName: string;
     lastName: string;
     fatherName: string;
@@ -42,7 +42,7 @@ export interface IAddUser{
     rank?: Rank
 }
 export interface IUser {
-    _id?:string
+    _id?: string
     firstName: string;
     lastName: string;
     fatherName: string;
@@ -68,6 +68,7 @@ export enum Role {
 }
 
 export enum Rank {
+    ALL = 'all',
     LEADER = 'leader',
     ROVER = 'rover',
     ADVANCED_SCOUT = 'advanced scout',
