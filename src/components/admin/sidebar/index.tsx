@@ -17,14 +17,14 @@ import {
 } from "@/components/ui/sidebar"
 import { usePathname } from "next/navigation"
 import { generateSidebar } from "./data"
-import { Button } from "../ui/button"
+import { Button } from "../../ui/button"
 import { useUserContext } from "@/providers/UserProvider"
 
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathName = usePathname()
   const data = generateSidebar(pathName)
-  const {signOut} = useUserContext()
+  const { signOut } = useUserContext()
   return (
     <Sidebar {...props}>
       <SidebarHeader>
@@ -32,7 +32,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
               <a href="#">
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+                <div className="flex aspect-square bg-primary size-8 items-center justify-center rounded-lg  text-sidebar-primary-foreground">
                   <GalleryVerticalEnd className="size-4" />
                 </div>
                 <div className="flex flex-col gap-0.5 leading-none">
@@ -71,7 +71,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarGroup>
       </SidebarContent>
       <SidebarRail />
-      <Button className="m-4" onClick={()=>signOut()}>LOGOUT</Button>
+      <Button className="m-4" onClick={() => signOut()}>LOGOUT</Button>
     </Sidebar>
   )
 }
