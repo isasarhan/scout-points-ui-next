@@ -1,21 +1,23 @@
+import { getAuth } from '@/lib/auth';
 import AddAchievementModule from '@/modules/admin/dashboard/achievements/add';
 import useAchievementCategory from '@/services/achievements/categories';
 import useDepartments from '@/services/departments';
 import { cookies } from 'next/headers';
 import React, { FC } from 'react';
 
-export interface AddAchievementPageProps {}
+export interface AddAchievementPageProps { }
 
 const AddAchievementPage: FC<AddAchievementPageProps> = async () => {
-  const token = (await cookies()).get("token")?.value;
+  const { token } = await getAuth();
 
-  const { getAll } = useDepartments({ token: token });
-  const data = await getAll();
+  const { getAll: getAllDedpartments } = useDepartments({ token: token });
 
-  const { getAll:getAllCategories } = useAchievementCategory({ token: token })
-    const categories = await getAllCategories();   
+  const { getAll: getAllCategories } = useAchievementCategory({ token: token })
+
+  const [departments, categories] = await Promise.all([getAllDedpartments(), getAllCategories()])
+  
   return (
-    <AddAchievementModule departments={data} categories={categories}/>
+    <AddAchievementModule departments={departments} categories={categories} />
   );
 };
 

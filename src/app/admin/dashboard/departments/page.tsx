@@ -1,3 +1,4 @@
+import { getAuth } from '@/lib/auth';
 import AllDepartmentsModule from '@/modules/admin/dashboard/departments';
 import useDepartments from '@/services/departments';
 import { cookies } from 'next/headers';
@@ -7,7 +8,7 @@ export interface DepartmentsPageProps { }
 
 
 const DepartmentsPage: FC<DepartmentsPageProps> = async () => {
-    const token = (await cookies()).get("token")?.value;
+    const { token } = await getAuth();
 
     const { getAll } = useDepartments({ token: token })
     const data = await getAll();

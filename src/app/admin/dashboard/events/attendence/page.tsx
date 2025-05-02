@@ -1,3 +1,4 @@
+import { getAuth } from '@/lib/auth';
 import AttendenceModule from '@/modules/admin/dashboard/events/attendence';
 import useEvents from '@/services/events';
 import useUsers from '@/services/users';
@@ -7,12 +8,11 @@ import React, { FC } from 'react';
 export interface AttendencePageProps { }
 
 const AttendencePage: FC<AttendencePageProps> = async () => {
-    const token = (await cookies()).get("token")?.value;
-    const currentUser = (await cookies()).get("currentUser")?.value || '';
-    const parsedUser = JSON.parse(currentUser)
+
+    const { token, user } = await getAuth();
 
     const { getAll } = useUsers({ token: token })    
-    const data = await getAll(parsedUser.department?._id);
+    const data = await getAll({department: user?.department?._id});
     
     const { getAll:getAllEvents } = useEvents({ token: token })
     const dataEvents = await getAllEvents();

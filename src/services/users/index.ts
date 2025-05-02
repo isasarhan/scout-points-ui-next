@@ -5,6 +5,7 @@ import axios from "axios";
 const useUsers = ({ token }: { token: string | undefined }) => {
     const instance = httpService.instance
     const url = `/users`;
+    
     const getAll = async (query?: Record<string, any>) => {
         if (!token) return;
 
