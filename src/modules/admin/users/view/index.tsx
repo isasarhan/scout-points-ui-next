@@ -14,23 +14,23 @@ const ViewUserModule: FC<ViewUserModuleProps> = ({ user }) => {
         <div className='flex flex-col gap-5'>
             <div className='flex gap-5'>
                 <Card className="flex flex-1 flex-grow gap-3 justify-center items-center p-5">
-                    <RoadIcon/>
+                    <RoadIcon className='text-primary'/>
                     {user.address?.street}
                 </Card>
                 <Card className="flex flex-1 flex-grow gap-3 justify-center items-center p-5">
-                    <BuildingIcon/>
+                    <BuildingIcon className='text-primary'/>
                     {user.address?.building}
                 </Card>
                 <Card className="flex flex-1 flex-grow gap-3 justify-center items-center p-5">
-                    <NumberIcon/>
+                    <NumberIcon className='text-primary'/>
                     {user.address?.floor}
                 </Card>
                 <Card className="flex flex-1 flex-grow gap-3 justify-center items-center p-5">
-                    <GlobeIcon/>
+                    <GlobeIcon className='text-primary'/>
                     {user.address?.country}
                 </Card>
                 <Card className="flex flex-1 flex-grow gap-3 justify-center items-center p-5">
-                    <LocationIcon/>
+                    <LocationIcon className='text-primary'/>
                     {user.address?.city}
                 </Card>
             </div>
@@ -42,9 +42,9 @@ const ViewUserModule: FC<ViewUserModuleProps> = ({ user }) => {
                     </CardHeader>
                     <CardContent >
                         <div className='flex justify-center flex-col items-center gap-2'>
-                            <p className='flex  items-center gap-3 text-xl'><UserIcon />{user.firstName} {user.lastName}</p>
-                            <p className='flex items-center gap-3 text-xl'> <EmailIcon />{user.email}</p>
-                            <p className='flex items-center gap-3 text-xl'><PhoneIcon />{user.phone}</p>
+                            <p className='flex  items-center gap-3 text-xl'><UserIcon className='text-primary'/>{user.firstName} {user.lastName}</p>
+                            <p className='flex items-center gap-3 text-xl'> <EmailIcon className='text-primary'/>{user.email}</p>
+                            <p className='flex items-center gap-3 text-xl'><PhoneIcon className='text-primary'/>{user.phone}</p>
                         </div>
                     </CardContent>
                     <CardFooter>
@@ -57,7 +57,7 @@ const ViewUserModule: FC<ViewUserModuleProps> = ({ user }) => {
                     </CardHeader>
                     <CardContent>
                         <CardDescription className='flex flex-col gap-2'>
-                            <div className='flex justify-between bg-black text-white p-3 rounded-xl'>
+                            <div className='flex justify-between bg-primary text-white p-3 rounded-xl'>
                                 <div className='w-1/4'>Father Name:</div>
                                 <div className='w-3/4 text-center'>{user.fatherName}</div>
                             </div>
@@ -65,7 +65,7 @@ const ViewUserModule: FC<ViewUserModuleProps> = ({ user }) => {
                                 <div className='w-1/4'>Mother Name:</div>
                                 <div className='w-3/4 text-center'>{user.motherName}</div>
                             </div>
-                            <div className='flex justify-between bg-black text-white p-3 rounded-xl'>
+                            <div className='flex justify-between bg-primary text-white p-3 rounded-xl'>
                                 <div className='w-1/4'>Nationality:</div>
                                 <div className='w-3/4 text-center'>{user.nationality}</div>
                             </div>

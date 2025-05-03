@@ -30,13 +30,13 @@ export const getRankColor = (rank?: Rank) => {
 export const getLevelColor = (level: string) => {
   switch (level) {
     case 'beginner':
-      return 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300';
+      return 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300 justify-center p-2 rounded-full';
     case 'intermediate':
-      return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300';
+      return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300 justify-center p-2 rounded-full';
     case 'advanced':
-      return 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300';
+      return 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300 justify-center p-2 rounded-full';
     default:
-      return 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300';
+      return 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300 justify-center p-2 rounded-full';
   }
 };
 export const getInitials = (name: string) => {

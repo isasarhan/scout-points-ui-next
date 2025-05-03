@@ -71,7 +71,6 @@ export enum Role {
 }
 
 export enum Rank {
-    ALL = 'all',
     LEADER = 'leader',
     ROVER = 'rover',
     ADVANCED_SCOUT = 'advanced scout',

@@ -64,9 +64,8 @@ const EventsModule: FC<EventsModuleProps> = ({ events }) => {
         },
     ]
     return (
-        <Card className='p-4'>
-            <Table data={events} column={column} />
-        </Card>
+
+        <Table data={events} column={column} />
     );
 };
 

@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation"
 import IsLoggedOut from "@/components/roles/isLoggedOut"
 import IsLoggedIn from "@/components/roles/isLoggedIn"
 import { useUserContext } from "@/providers/UserProvider"
+import IsUser from "@/components/roles/isUser"
 
 const NavLink = ({ href, children }: { href: string; children: React.ReactNode }) => (
   <Link
@@ -45,6 +46,9 @@ export function Navbar() {
                 <IsAdmin>
                   <NavLink href="/admin">Admin</NavLink>
                 </IsAdmin>
+                <IsUser>
+                  <NavLink href="/account">Account</NavLink>
+                </IsUser>
                 <NavLink href="/about">About</NavLink>
                 <NavLink href="/achievements">Achievements</NavLink>
 

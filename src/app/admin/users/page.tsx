@@ -1,15 +1,20 @@
 import { getAuth } from "@/lib/auth";
 import UsersModule from "@/modules/admin/users";
 import useUsers from "@/services/users";
+import React, { FC } from 'react';
 
+export interface UsersPageProps {
+    searchParams: Promise<{ query: string }>
+}
 
-const UsersPage = async () => {
-
+const UsersPage: FC<UsersPageProps> = async ({ searchParams }) => {
+    const { query } = await searchParams
+    
     const { token, user } = await getAuth();
-    
+
     const { getAll } = useUsers({ token })
-    const data = await getAll({department: user?.department?._id});    
-    
+    const data = await getAll({ department: user?.department?._id, searchTerm:query });
+
     return (
         <UsersModule users={data} />
     );

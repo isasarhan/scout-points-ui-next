@@ -44,9 +44,9 @@ const AccountModule: FC<AccountModuleProps> = () => {
                     </CardHeader>
                     <CardContent >
                         <div className='flex justify-center flex-col items-center gap-2'>
-                            <p className='flex  items-center gap-3 text-xl'><UserIcon />{user?.firstName} {user?.lastName}</p>
-                            <p className='flex items-center gap-3 text-xl'> <EmailIcon />{user?.email}</p>
-                            <p className='flex items-center gap-3 text-xl'><PhoneIcon />{user?.phone}</p>
+                            <p className='flex  items-center gap-3 text-xl'><UserIcon className='text-primary' />{user?.firstName} {user?.lastName}</p>
+                            <p className='flex items-center gap-3 text-xl'> <EmailIcon className='text-primary' />{user?.email}</p>
+                            <p className='flex items-center gap-3 text-xl'><PhoneIcon className='text-primary' />{user?.phone}</p>
                         </div>
                     </CardContent>
                     <CardFooter>
@@ -59,7 +59,7 @@ const AccountModule: FC<AccountModuleProps> = () => {
                     </CardHeader>
                     <CardContent>
                         <CardDescription className='flex flex-col gap-2'>
-                            <div className='flex justify-between bg-black text-white p-3 rounded-xl'>
+                            <div className='flex justify-between bg-primary text-white p-3 rounded-xl'>
                                 <div className='w-1/4'>Father Name:</div>
                                 <div className='w-3/4 text-center'>{user?.fatherName}</div>
                             </div>
@@ -67,7 +67,7 @@ const AccountModule: FC<AccountModuleProps> = () => {
                                 <div className='w-1/4'>Mother Name:</div>
                                 <div className='w-3/4 text-center'>{user?.motherName}</div>
                             </div>
-                            <div className='flex justify-between bg-black text-white p-3 rounded-xl'>
+                            <div className='flex justify-between bg-primary text-white p-3 rounded-xl'>
                                 <div className='w-1/4'>Nationality:</div>
                                 <div className='w-3/4 text-center'>{user?.nationality}</div>
                             </div>

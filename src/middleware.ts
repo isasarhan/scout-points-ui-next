@@ -1,16 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import { IUser, Role } from "./types/user";
+import { getAuth } from "./lib/auth";
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
+    const { user } = await getAuth()
 
-    const currentUser = request.cookies.get('currentUser')?.value
-
-    if (!currentUser && (request.nextUrl.pathname.includes('/admin')||request.nextUrl.pathname.includes('/account')))
+    if (!user && (request.nextUrl.pathname.includes('/admin') || request.nextUrl.pathname.includes('/account')))
         return Response.redirect(new URL('/login', request.url))
-    if (currentUser) {
-        const parsedUser = JSON.parse(currentUser) as IUser
 
-        switch (parsedUser.role) {
+    if (user) {
+
+        switch (user.role) {
             case Role.USER:
                 if (request.nextUrl.pathname.startsWith("/admin")) {
                     return NextResponse.redirect(new URL("/", request.url));

@@ -23,10 +23,12 @@ const AchievementRequestsModule: FC<AchievementRequestsModuleProps> = ({ request
     const router = useRouter()
 
     const handleStatus = (value: IAchievementRequest) => {
-        update(value._id!, { status: value.status === Status.Complete ? Status.Pending : Status.Complete }).then(() => {
+        update(value._id!, { achievement: value.achievement._id, user: value.user._id, status: value.status === Status.Complete ? Status.Pending : Status.Complete }).then(() => {
             router.refresh()
             toast.success('updated!')
-        })
+        }).catch((e)=>
+            toast.error(`${e.message}`)
+        )
     }
 
     const handleDelete = (id: string) => {
@@ -84,7 +86,7 @@ const AchievementRequestsModule: FC<AchievementRequestsModuleProps> = ({ request
             render: (value: IAchievementRequest) => {
                 return <div className="flex items-center justify-center" >
                     <ConfirmationDialog title='Delete Request' onConfirm={() => handleDelete(value._id!)} description='Are you sure you want to delete the request?'>
-                        <Trash className='text-red-500 cursor-pointer'  />
+                        <Trash className='text-red-500 cursor-pointer' />
                     </ConfirmationDialog>
                 </div>
             }
