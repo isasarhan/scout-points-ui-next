@@ -1,7 +1,6 @@
 import { getAuth } from '@/lib/auth';
 import AchievementsModule from '@/modules/admin/achievements';
 import useAchievements from '@/services/achievements';
-import { cookies } from 'next/headers';
 import React, { FC } from 'react';
 
 export interface AchievementsPageProps {}
