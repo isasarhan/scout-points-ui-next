@@ -9,7 +9,7 @@ export interface AssociationsModuleProps {
     associations: IAssociation[]
 }
 
-const AssociationsModule: FC<AssociationsModuleProps> = ({associations=[]}) => {
+const AssociationsModule: FC<AssociationsModuleProps> = ({ associations = [] }) => {
     const column: Column[] = [
         {
             label: 'Name',
@@ -30,17 +30,15 @@ const AssociationsModule: FC<AssociationsModuleProps> = ({associations=[]}) => {
         {
             label: 'View More',
             value: '_id',
-            render: (value:IAssociation)=>(
+            render: (value: IAssociation) => (
                 <div className='flex justify-center items-center w-full'>
-                    <Link href={`/admin/dashboard/users/${value._id}`}><ViewIcon size={20}/> </Link>
+                    <Link href={`/admin/dashboard/users/${value._id}`}><ViewIcon size={20} /> </Link>
                 </div>
             )
         },
     ]
     return (
-        <Card className='p-4'>
-            <Table data={associations} column={ column} />
-        </Card>
+        <Table data={associations} column={column} />
     );
 };
 

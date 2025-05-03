@@ -93,9 +93,7 @@ const AchievementRequestsModule: FC<AchievementRequestsModuleProps> = ({ request
         },
     ]
     return (
-        <Card className='p-4'>
             <Table data={requests} column={column} />
-        </Card>
     );
 };
 

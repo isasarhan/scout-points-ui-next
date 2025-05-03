@@ -45,9 +45,7 @@ const AllDepartmentsModule: FC<AllDepartmentsModuleProps> = ({ departments }) =>
         },
     ]
     return (
-        <Card className='p-4'>
             <Table data={departments} column={column} />
-        </Card>
     );
 };
 

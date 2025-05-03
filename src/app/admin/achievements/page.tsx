@@ -12,7 +12,9 @@ const AchievementsPage: FC<AchievementsPageProps> = async () => {
   const data = await getAll();
 
   return (
-    <AchievementsModule achievements={data}/>
+    <>
+      {data.length === 0? <></>:<AchievementsModule achievements={data}/>}
+    </>
   );
 };
 

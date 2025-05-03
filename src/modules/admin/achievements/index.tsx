@@ -39,9 +39,7 @@ const AchievementsModule: FC<AchievementsModuleProps> = ({ achievements }) => {
     },
   ]
   return (
-    <Card className='p-4'>
       <Table data={achievements} column={column} />
-    </Card>
   );
 };
 
