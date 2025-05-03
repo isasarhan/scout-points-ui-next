@@ -20,6 +20,7 @@ export interface IAddUser {
     address?: Address;
     nationality?: string;
     points?: number;
+    isApproved?: boolean;
     profileUrl?: string;
     department?: string
     isSuperAdmin?: boolean;
@@ -34,6 +35,7 @@ export interface IAddUser {
     password: string;
     phone?: string;
     address?: Address;
+    isApproved?: boolean;
     nationality?: string;
     points?: number;
     profileUrl?: string;
@@ -51,6 +53,7 @@ export interface IUser {
     password: string;
     phone?: string;
     address?: Address;
+    isApproved?: boolean;
     nationality?: string;
     points?: number;
     profileUrl?: string;

@@ -3,7 +3,7 @@ import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, Tabl
 
 export interface Column {
     label: string;
-    value: any;
+    value?: any;
     render?: (value: any, row?: any) => React.ReactNode;
 }
 

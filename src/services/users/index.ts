@@ -5,7 +5,7 @@ import axios from "axios";
 const useUsers = ({ token }: { token: string | undefined }) => {
     const instance = httpService.instance
     const url = `/users`;
-    
+
     const getAll = async (query?: Record<string, any>) => {
         if (!token) return;
 
@@ -52,9 +52,30 @@ const useUsers = ({ token }: { token: string | undefined }) => {
             throw new Error(errorMessage);
         }
     };
+    const update = async (id: string, user: Partial<IAddUser>) => {
+        if (!token) return;
 
+        if (!httpService.assignToken(token)) return null;
 
-    return { getById, getAll, add };
+        try {
+            const res = await instance.put(`${url}/${id}`, user);
+            return res.data;
+        } catch (error) {
+            console.error("Error adding user:", error);
+
+            let errorMessage = "An unexpected error occurred";
+
+            if (axios.isAxiosError(error)) {
+                errorMessage = error.response?.data?.message || error.message || errorMessage;
+            } else if (error instanceof Error) {
+                errorMessage = error.message;
+            }
+
+            throw new Error(errorMessage);
+        }
+    };
+
+    return { getById, getAll, add, update };
 }
 
 export default useUsers;

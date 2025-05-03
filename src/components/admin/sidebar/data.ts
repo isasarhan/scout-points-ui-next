@@ -7,13 +7,13 @@ export const generateSidebar = (pathName: string) => {
                 items: [
                     {
                         title: "All Users",
-                        url: "/admin/dashboard/users",
-                        isActive: pathName === "/admin/dashboard/users"
+                        url: "/admin/users",
+                        isActive: pathName === "/admin/users"
                     },
                     {
                         title: "Add New User",
-                        url: "/admin/dashboard/users/add",
-                        isActive: pathName === "/admin/dashboard/users/add"
+                        url: "/admin/users/add",
+                        isActive: pathName === "/admin/users/add"
                     },
 
                 ],
@@ -24,18 +24,18 @@ export const generateSidebar = (pathName: string) => {
                 items: [
                     {
                         title: "All Events",
-                        url: "/admin/dashboard/events",
-                        isActive: pathName === "/admin/dashboard/events"
+                        url: "/admin/events",
+                        isActive: pathName === "/admin/events"
                     },
                     {
                         title: "Add New Event",
-                        url: "/admin/dashboard/events/add",
-                        isActive: pathName === "/admin/dashboard/events/add"
+                        url: "/admin/events/add",
+                        isActive: pathName === "/admin/events/add"
                     },
                     {
                         title: "Take Attendence",
-                        url: "/admin/dashboard/events/attendence",
-                        isActive: pathName === "/admin/dashboard/events/attendence"
+                        url: "/admin/events/attendence",
+                        isActive: pathName === "/admin/events/attendence"
                     },
                 ],
             },
@@ -45,13 +45,13 @@ export const generateSidebar = (pathName: string) => {
                 items: [
                     {
                         title: "All Departments",
-                        url: "/admin/dashboard/departments",
-                        isActive: pathName === "/admin/dashboard/departments"
+                        url: "/admin/departments",
+                        isActive: pathName === "/admin/departments"
                     },
                     {
                         title: "Add New Department",
-                        url: "/admin/dashboard/departments/add",
-                        isActive: pathName === "/admin/dashboard/departments/add"
+                        url: "/admin/departments/add",
+                        isActive: pathName === "/admin/departments/add"
                     },
                 ],
             },
@@ -61,13 +61,13 @@ export const generateSidebar = (pathName: string) => {
                 items: [
                     {
                         title: "All Associations",
-                        url: "/admin/dashboard/associations",
-                        isActive: pathName === "/admin/dashboard/associations"
+                        url: "/admin/associations",
+                        isActive: pathName === "/admin/associations"
                     },
                     {
                         title: "Add New Associations",
-                        url: "/admin/dashboard/associations/add",
-                        isActive: pathName === "/admin/dashboard/associations/add"
+                        url: "/admin/associations/add",
+                        isActive: pathName === "/admin/associations/add"
                     },
                 ],
             },
@@ -77,19 +77,24 @@ export const generateSidebar = (pathName: string) => {
                 items: [
                     {
                         title: "All Achievements",
-                        url: "/admin/dashboard/achievements",
-                        isActive: pathName === "/admin/dashboard/achievements"
+                        url: "/admin/achievements",
+                        isActive: pathName === "/admin/achievements"
                     },
                     {
                         title: "Add New Achievement",
-                        url: "/admin/dashboard/achievements/add",
-                        isActive: pathName === "/admin/dashboard/achievements/add"
+                        url: "/admin/achievements/add",
+                        isActive: pathName === "/admin/achievements/add"
                     },
                     {
                         title: "Categories",
-                        url: "/admin/dashboard/achievements/categories",
-                        isActive: pathName === "/admin/dashboard/achievements/categories"
-                    }
+                        url: "/admin/achievements/categories",
+                        isActive: pathName === "/admin/achievements/categories"
+                    },
+                    {
+                        title: "Achievement Requests",
+                        url: "/admin/achievement-requests",
+                        isActive: pathName === "/admin/achievement-requests"
+                    },
                 ],
             },
         ],

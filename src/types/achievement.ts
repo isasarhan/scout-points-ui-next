@@ -1,4 +1,4 @@
-import { Rank } from "./user";
+import { IUser, Rank } from "./user";
 
 export enum Status {
     Pending = 'pending',
@@ -6,9 +6,15 @@ export enum Status {
     Available = 'available',
 }
 
-export interface IAchievementRequest {
+export interface IAddAchievementRequest {
     user: string
     achievement: string
+    status?: Status;
+}
+export interface IAchievementRequest {
+    _id?: string
+    user: IUser
+    achievement: IAchievement
     status?: Status;
 }
 export interface IAchievement {

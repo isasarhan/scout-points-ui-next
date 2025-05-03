@@ -1,3 +1,4 @@
+import { IAddAchievementRequest } from '@/types/achievement';
 import httpService from '../axios';
 import { IAssociation } from '@/types/association';
 import axios from "axios";
@@ -41,6 +42,7 @@ const useAssociations = ({ token }: { token: string | undefined }) => {
       throw new Error(errorMessage);
     }
   };
+
 
   return { getById, getAll, add };
 }

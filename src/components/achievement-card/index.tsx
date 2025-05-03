@@ -7,17 +7,17 @@ import { Badge } from '../ui/badge';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '../ui/collapsible';
 import { Button } from '../ui/button';
 import { getLevelColor } from '@/lib/utils';
-export interface AchievementCardProps {
+export interface AchievementCardProps extends React.HTMLAttributes<HTMLDivElement> {
     achievement: IAchievement;
     isCompleted?: boolean;
     isPending?: boolean;
     onApply?: () => void;
 }
-const AchievementCard: FC<AchievementCardProps> = ({ achievement, isCompleted = false, isPending = false, onApply }) => {
+const AchievementCard: FC<AchievementCardProps> = ({ achievement, isCompleted = false, isPending = false, onApply, ...props }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <Card className={`overflow-hidden transition-all duration-300 h-full flex flex-col ${isCompleted
+        <Card {...props} className={`overflow-hidden transition-all duration-300 h-full flex flex-col ${isCompleted
                 ? 'border-green-300 dark:border-green-800 bg-green-50/40 dark:bg-green-950/20'
                 : isPending
                     ? 'border-yellow-300 dark:border-yellow-800 bg-yellow-50/40 dark:bg-yellow-950/20'

@@ -1,5 +1,5 @@
 import { getAuth } from '@/lib/auth';
-import AchievementsModule from '@/modules/main/achievements';
+import AchievementsModule from '@/modules/account/achievements';
 import useAchievements from '@/services/achievements';
 import useAchievementCategory from '@/services/achievements/categories';
 import useAchievementRequests from '@/services/achievementsRequests';
