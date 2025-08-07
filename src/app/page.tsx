@@ -45,7 +45,7 @@ const LandingPage: FC = () => {
             <p className="mt-2 text-gray-700">Work with your team to complete a group challenge.</p>
             <p className="mt-2 text-sm text-gray-500">Points: 100</p>
           </div>
-          <div className="border p-6 rounded-lg shadow-lg">
+          <div className="border p-6 rounded-lg shadow-lg ">
             <h3 className="text-xl font-medium text-primary">Leader</h3>
             <p className="mt-2 text-gray-700">Lead your group to victory in a scouting event.</p>
             <p className="mt-2 text-sm text-gray-500">Points: 200</p>

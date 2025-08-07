@@ -4,7 +4,6 @@ import * as React from "react"
 import Link from "next/link"
 import { Menu, X, Search, Moon, Sun, LogIn, LogOut } from "lucide-react"
 import { useTheme } from "next-themes"
-
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
@@ -14,11 +13,12 @@ import IsLoggedOut from "@/components/roles/isLoggedOut"
 import IsLoggedIn from "@/components/roles/isLoggedIn"
 import { useUserContext } from "@/providers/UserProvider"
 import IsUser from "@/components/roles/isUser"
+import Logo from "./logo"
 
 const NavLink = ({ href, children }: { href: string; children: React.ReactNode }) => (
   <Link
     href={href}
-    className="text-foreground hover:text-foreground/80 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+    className="text-foreground hover:text-foreground/80 px-3 py-2 rounded-md text-sm font-medium transition-colors "
   >
     {children}
   </Link>
@@ -33,11 +33,11 @@ export function Navbar() {
   return (
     <nav className="bg-background shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-20">
           <div className="flex items-center">
             <div className="flex-shrink-0">
-              <Link href="/" className="text-xl font-bold text-foreground">
-                Logo
+              <Link href="/" className="text-xl font-bold text-foreground ">
+                <Logo />
               </Link>
             </div>
             <div className="hidden md:block">
@@ -50,7 +50,9 @@ export function Navbar() {
                   <NavLink href="/account">Account</NavLink>
                 </IsUser>
                 <NavLink href="/about">About</NavLink>
-                <NavLink href="/achievements">Achievements</NavLink>
+                <IsAdmin>
+                  <NavLink href="/achievements">Achievements</NavLink>
+                </IsAdmin>
 
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>

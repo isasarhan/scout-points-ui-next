@@ -26,13 +26,6 @@ import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import Autocomplete from "@/components/autocomplete";
 import { nationalities } from "@/lib/nationalities";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
 import { Rank, Role } from "@/types/user";
 import { IDepartment } from "@/types/department";
 import useUsers from "@/services/users";

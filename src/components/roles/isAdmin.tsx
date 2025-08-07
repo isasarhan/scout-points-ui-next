@@ -1,4 +1,3 @@
-import { getAuth } from '@/lib/auth';
 import { useUserContext } from '@/providers/UserProvider';
 import { Role } from '@/types/user';
 import React, { FC } from 'react';

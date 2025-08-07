@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 export interface DropdownProps {
-    placeholder:string
+    placeholder?:string
     options: { label: string, value: string, key: string }[];
     handleDropdownChange(value: string): void
 }

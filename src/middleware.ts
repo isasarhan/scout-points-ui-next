@@ -8,6 +8,9 @@ export async function middleware(request: NextRequest) {
     if (!user && (request.nextUrl.pathname.includes('/admin') || request.nextUrl.pathname.includes('/account')))
         return Response.redirect(new URL('/login', request.url))
 
+    if (!user && (request.nextUrl.pathname.includes('/achievements')))
+        return Response.redirect(new URL('/login', request.url))
+
     if (user) {
 
         switch (user.role) {

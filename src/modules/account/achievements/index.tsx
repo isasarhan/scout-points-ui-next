@@ -120,7 +120,13 @@ const AchievementsModule: FC<AchievementsModuleProps> = ({ achievemnts, categori
             <div className='flex gap-3 pb-7'>
                 <SearchInput handleSearch={handleSearch} />
                 <div className="flex gap-2">
-                    <Dropdown options={categories} handleDropdownChange={handleCategoryChange} />
+                    <Dropdown options={categories.map(cat=>{
+                        return {
+                            key: cat._id!,
+                            label: cat.name!,
+                            value: cat._id!
+                        }
+                    })} handleDropdownChange={handleCategoryChange} />
                 </div>
             </div >
             <Tabs value={activeTab} onValueChange={setActiveTab}>
