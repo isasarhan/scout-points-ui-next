@@ -1,3 +1,4 @@
+import NotFound from '@/components/not-found';
 import { getAuth } from '@/lib/auth';
 import EventsModule from '@/modules/admin/events';
 import useEvents from '@/services/events';
@@ -10,8 +11,15 @@ const EventsPage: FC<EventsPageProps> = async () => {
 
     const { getAll } = useEvents({ token: token })
     const data = await getAll(user?.department?._id);
+    if (data.length === 0) {
+        return (
+            <NotFound
+                title='No Events Found'
+                description='It looks like there are no events available at the moment. Please check back later or try refreshing the page.' />
+        )
+    }
     return (
-        <EventsModule events={data}/>
+        <EventsModule events={data} />
     );
 };
 

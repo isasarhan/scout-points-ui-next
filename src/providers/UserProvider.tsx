@@ -34,17 +34,17 @@ const UserProvider: FC<UserProviderProps> = ({ children }) => {
     const [user, setUser] = useState<IUser|null>()
     const [token, setToken] = useState('')
     const [isLoggedIn, setIsLoggedIn] = useState(false)
-    const { login } = useAuth()
+    const { login } = useAuth({})
     const router = useRouter()
 
     const signIn = async (email: string, password: string) => {
         return await login(email, password ).then((data) => {
-            toast.success("Logged In Successfully")
-            const { token, user } = data
-            setUser(user)
+            toast.success("Logged In Successfully")            
+            const { token, user, account } = data
+            setUser({...user, ...account})
             setToken(token)
             Cookies.set('token', token)
-            Cookies.set('currentUser', JSON.stringify(user))
+            Cookies.set('currentUser', JSON.stringify({...user, ...account}))
             router.push('/admin')
             return data
         }).catch((e)=>{

@@ -16,10 +16,6 @@ const AllDepartmentsModule: FC<AllDepartmentsModuleProps> = ({ departments }) =>
             value: 'name'
         },
         {
-            label: 'User Name',
-            value: 'username'
-        },
-        {
             label: 'Type',
             value: 'type'
         },

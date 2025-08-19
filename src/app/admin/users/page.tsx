@@ -13,8 +13,7 @@ const UsersPage: FC<UsersPageProps> = async ({ searchParams }) => {
     const { token, user } = await getAuth();
 
     const { getAll } = useUsers({ token })
-    const data = await getAll({ });
-    
+    const data = await getAll({ });    
 
     return (
         <UsersModule users={data} />

@@ -32,13 +32,14 @@ import useUsers from "@/services/users";
 import { toast } from "sonner";
 import FormInput from "@/components/common/form/input";
 import FormSelect from "@/components/common/form/select";
+import useAuth from "@/services/auth";
 
 export interface AddUserModuleProps {
     departments: IDepartment[];
 }
 const AddUserModule: FC<AddUserModuleProps> = ({ departments }) => {
     const { token } = useUserContext();
-    const { add } = useUsers({ token })
+    const { register } = useAuth({})
 
     const form = useForm({
         mode: "onBlur",
@@ -49,7 +50,7 @@ const AddUserModule: FC<AddUserModuleProps> = ({ departments }) => {
 
     const onSubmit = async (data: UserType) => {
         try {
-            await add(data);
+            await register(data);
             toast.success("User added successfully!");
         } catch (e: any) {
             toast.error(e.message);
@@ -99,6 +100,12 @@ const AddUserModule: FC<AddUserModuleProps> = ({ departments }) => {
                         <div className="flex items-center w-full gap-4">
                             <FormInput
                                 control={form.control}
+                                name="username"
+                                title='Username'
+                                placeholder="Enter username"
+                            />
+                            <FormInput
+                                control={form.control}
                                 name="email"
                                 title='Email'
                                 placeholder="Enter email"
@@ -117,6 +124,10 @@ const AddUserModule: FC<AddUserModuleProps> = ({ departments }) => {
                                 placeholder="Enter phone"
                             />
 
+
+                        </div>
+
+                        <div className="grid grid-cols-4 gap-4">
                             <FormField
                                 control={form.control}
                                 name="nationality"
@@ -135,9 +146,6 @@ const AddUserModule: FC<AddUserModuleProps> = ({ departments }) => {
                                     </FormItem>
                                 )}
                             />
-                        </div>
-
-                        <div className="grid grid-cols-4 gap-4">
                             <FormSelect
                                 control={form.control}
                                 name="role"

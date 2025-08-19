@@ -1,3 +1,4 @@
+import NotFound from '@/components/not-found';
 import { getAuth } from '@/lib/auth';
 import AchievementsModule from '@/modules/admin/achievements';
 import useAchievements from '@/services/achievements';
@@ -11,11 +12,17 @@ const AchievementsPage: FC<AchievementsPageProps> = async () => {
   const { getAll } = useAchievements({ token: token })
   const data = await getAll();
 
-  return (
-    <>
-      {data.length === 0? <></>:<AchievementsModule achievements={data}/>}
-    </>
-  );
+    if (data.length === 0) {
+        return (
+            <NotFound
+                title='No Achievements Found'
+                description='It looks like there are no achievements available at the moment. Please check back later or try refreshing the page.' />
+        )
+    }
+    return (
+        <AchievementsModule achievements={data}/>
+    );
+
 };
 
 export default AchievementsPage;

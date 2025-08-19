@@ -3,14 +3,15 @@ import { Types } from "mongoose";
 import { Rank, Role } from "@/types/user";
 
 const AddressSchema = z.object({
-  street: z.string().min(1, "Street is required"),
-  building: z.string().min(1, "Building is required"),
-  floor: z.string().min(1, "Floor is required"),
-  country: z.string().min(1, "Country is required"),
-  city: z.string().min(1, "City is required"),
+  street: z.string().optional(),
+  building: z.string().optional(),
+  floor: z.string().optional(),
+  country: z.string().optional(),
+  city: z.string().optional(),
 });
 
 const AddUserSchema = z.object({
+  username: z.string().min(1, "First name is required"),
   firstName: z.string().min(1, "First name is required"),
   lastName: z.string().min(1, "Last name is required"),
   fatherName: z.string().min(1, "Father name is required"),

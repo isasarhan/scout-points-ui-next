@@ -2,7 +2,6 @@ import { z } from "zod";
 
 export const addDepartmentSchema = z.object({
     name: z.string().min(3, "Name must be at least 3 characters"),
-    username: z.string().min(3, "Name must be at least 3 characters"),
     type: z.string().min(3, "Type is required"),
     description: z.string().optional(),
     location: z.object({

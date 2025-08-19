@@ -19,7 +19,7 @@ type FormData = z.infer<typeof formSchema>
 
 export default function MultiStepForm() {
     const [step, setStep] = useState(0)
-    const { register } = useAuth()
+    const { register } = useAuth({})
     const form = useForm<FormData>({
         resolver: zodResolver(formSchema),
         defaultValues: {

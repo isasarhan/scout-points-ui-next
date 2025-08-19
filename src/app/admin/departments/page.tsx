@@ -1,3 +1,4 @@
+import NotFound from '@/components/not-found';
 import { getAuth } from '@/lib/auth';
 import AllDepartmentsModule from '@/modules/admin/departments';
 import useDepartments from '@/services/departments';
@@ -12,9 +13,16 @@ const DepartmentsPage: FC<DepartmentsPageProps> = async () => {
 
     const { getAll } = useDepartments({ token: token })
     const data = await getAll();
-
+    
+    if (data.length === 0) {
+        return (
+            <NotFound
+                title='No Departments Found'
+                description='It looks like there are no departments available at the moment. Please check back later or try refreshing the page.' />
+        )
+    }
     return (
-        <AllDepartmentsModule departments={data}/>
+        <AllDepartmentsModule departments={data} />
     );
 };
 

@@ -8,6 +8,7 @@ import { Card } from '@/components/ui/card';
 import { Switch } from '@/components/ui/switch';
 import { getRankColor } from '@/lib/utils';
 import { useUserContext } from '@/providers/UserProvider';
+import useAuth from '@/services/auth';
 import useUsers from '@/services/users';
 import { IUser, Rank } from '@/types/user';
 import Link from 'next/link';
@@ -19,7 +20,7 @@ export interface UsersModuleProps {
 }
 const UsersModule: FC<UsersModuleProps> = ({ users = [] }) => {
     const { token } = useUserContext()
-    const { update } = useUsers({ token })
+    const { update } = useAuth({ token })
     const [filteredUsers, setFilteredUsers] = useState<IUser[]>(users)
     const searchParam = useSearchParams()
     const pathName = usePathname()
@@ -42,6 +43,8 @@ const UsersModule: FC<UsersModuleProps> = ({ users = [] }) => {
     }
 
     const handleChangePublicity = async (user: IUser) => {
+        console.log('user._id', user._id);
+        
         await update(user._id!, { isApproved: !user.isApproved }).then(() => {
             router.refresh()
             toast.success('updated!')

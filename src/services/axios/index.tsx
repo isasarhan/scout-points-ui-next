@@ -1,11 +1,10 @@
-import { SERVER } from "@/config";
 import axios, { AxiosInstance } from "axios";
 import Cookies from "js-cookie";
 class HttpService {
     public instance: AxiosInstance;
     constructor() {
         this.instance = axios.create({
-            baseURL: SERVER + "/api",
+            baseURL: process.env.NEXT_PUBLIC_API_URL + "/api",
             timeout: 30000,
             timeoutErrorMessage: "Time out !",
         });

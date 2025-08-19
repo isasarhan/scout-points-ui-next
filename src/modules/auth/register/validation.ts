@@ -9,6 +9,7 @@ export const addressSchema = z.object({
 })
 
 export const formSchema = z.object({
+    username: z.string().min(2, "First name must be at least 2 characters"),
     firstName: z.string().min(2, "First name must be at least 2 characters"),
     lastName: z.string().min(2, "Last name must be at least 2 characters"),
     fatherName: z.string().min(2, "Father's name must be at least 2 characters"),

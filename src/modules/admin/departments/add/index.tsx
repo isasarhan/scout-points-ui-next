@@ -66,12 +66,6 @@ const AddDepartmentModule: FC<AddDepartmentModuleProps> = () => {
                             title='Name'
                             placeholder="Enter department name"
                         />
-                        <FormInput
-                            control={form.control}
-                            name="username"
-                            title='User Name'
-                            placeholder="Enter user name"
-                        />
                         <FormSelect
                             control={form.control}
                             name="type"

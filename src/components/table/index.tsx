@@ -28,7 +28,7 @@ const TableComp: FC<TablePropsComp> = ({ data, column, caption }) => {
     <div className="w-full">
       {/* Desktop and tablet view */}
       <div className="hidden sm:block">
-        <Card className="p-4">
+        <div className="p-4">
           <Table>
             {caption && <TableCaption>{caption}</TableCaption>}
             <TableHeader>
@@ -52,7 +52,7 @@ const TableComp: FC<TablePropsComp> = ({ data, column, caption }) => {
               ))}
             </TableBody>
           </Table>
-        </Card>
+        </div>
       </div>
 
       {/* Mobile View */}
