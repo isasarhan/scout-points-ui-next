@@ -19,6 +19,23 @@ export const generateSidebar = (pathName: string) => {
                 ],
             },
             {
+                title: "Blogs",
+                url: "#",
+                items: [
+                    {
+                        title: "All Blogs",
+                        url: "/admin/blogs",
+                        isActive: pathName === "/admin/blogs"
+                    },
+                    {
+                        title: "Add New User",
+                        url: "/admin/blogs/add",
+                        isActive: pathName === "/admin/blogs/add"
+                    },
+
+                ],
+            },
+            {
                 title: "Events",
                 url: "#",
                 items: [

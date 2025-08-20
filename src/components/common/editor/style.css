@@ -1,0 +1,11 @@
+/* editor.css */
+.ql-toolbar {
+  border: 0;
+  padding: 50px;
+}
+.ql-container {
+  @apply border-none;
+}
+.ql-editor {
+  @apply min-h-[150px] p-4 text-gray-800;
+}

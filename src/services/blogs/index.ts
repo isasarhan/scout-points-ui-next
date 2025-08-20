@@ -1,55 +1,35 @@
+import { IDepartment } from '@/types/department';
 import httpService from '../axios';
 import axios from "axios";
-import { IAddEvent } from '@/types/event';
+import { IAddBlog, IBlog } from '@/types/blogs';
 
-const useEvents = ({ token }: { token: string | undefined }) => {
+const useBlogs = ({ token }: { token: string | undefined }) => {
     const instance = httpService.instance
-    const url = `/events`;
-
-    const getAll = async (department?: string) => {
-        const params = department ? { department } : {}
-        if (!token) return;
-
-        if (!httpService.assignToken(token)) return null;
-
-        try {
-            const res = await instance.get(`${url}`);
+    const url = `/blogs`;
+    const getAllBlogs = async () => {
+        if (!token) return
+        return httpService.assignToken(token) ? await instance.get(`${url}`).then((res) => {
             return res.data
-        } catch (error) {
-            console.error("Error getting events:", error);
-
-            let errorMessage = "An unexpected error occurred";
-
-            if (axios.isAxiosError(error)) {
-                errorMessage = error.response?.data?.message || error.message || errorMessage;
-            } else if (error instanceof Error) {
-                errorMessage = error.message;
-            }
-
-            throw new Error(errorMessage);
-        }
+        }).catch((e) => console.log(e)) : null
     };
 
     const getById = async (id: string) => {
         if (!token) return
         return httpService.assignToken(token) ? await instance.get(`${url}/${id}`).then((res) => {
             return res.data
-        }).catch((e) => {
-            console.log(e)
-            throw new Error(e)
-        }) : null
+        }).catch((e) => console.log(e)) : null
     };
 
-    const add = async (event: IAddEvent) => {
+    const add = async (department: IAddBlog) => {
         if (!token) return;
 
         if (!httpService.assignToken(token)) return null;
 
         try {
-            const res = await instance.post(`${url}/add`, event);
+            const res = await instance.post(`${url}/add`, department);
             return res.data;
         } catch (error) {
-            console.error("Error adding event:", error);
+            console.error("Error adding department:", error);
 
             let errorMessage = "An unexpected error occurred";
 
@@ -61,18 +41,19 @@ const useEvents = ({ token }: { token: string | undefined }) => {
 
             throw new Error(errorMessage);
         }
+
     };
 
-    const update = async (id: string, event: Partial<IAddEvent>) => {
+    const update = async (id: string, user: Partial<IAddBlog>) => {
         if (!token) return;
 
         if (!httpService.assignToken(token)) return null;
 
         try {
-            const res = await instance.put(`${url}/${id}`, event);
+            const res = await instance.put(`${url}/${id}`, user);
             return res.data;
         } catch (error) {
-            console.error("Error adding event:", error);
+            console.error("Error adding user:", error);
 
             let errorMessage = "An unexpected error occurred";
 
@@ -84,8 +65,8 @@ const useEvents = ({ token }: { token: string | undefined }) => {
 
             throw new Error(errorMessage);
         }
-    };
-    const remove = async (id: string) => {
+    }
+        const remove = async (id: string) => {
         if (!token) return;
 
         if (!httpService.assignToken(token)) return null;
@@ -100,7 +81,7 @@ const useEvents = ({ token }: { token: string | undefined }) => {
     }
 
 
-    return { getById, getAll, add, update, remove };
+    return { getBlogById: getById, getAllBlogs, addBlog: add, update, remove };
 }
 
-export default useEvents;
+export default useBlogs;

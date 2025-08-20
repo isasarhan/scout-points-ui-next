@@ -56,3 +56,10 @@ export const getStatusColor = (status?: Status) => {
       return 'bg-slate-100 justify-center p-2 rounded-full'
   }
 }
+
+export const shortenString = (text:string, characters = 30)=>{
+  if(text.length < characters)
+    return text
+
+  return text.slice(0, characters)+'...'
+}
