@@ -1,6 +1,8 @@
 'use client'
 import dynamic from 'next/dynamic';
 import React, { useState, type FC } from 'react';
+import 'react-quill-new/dist/quill.snow.css';
+
 import './style.css'
 
 const ReactQuill = dynamic(() => import('react-quill-new'), {

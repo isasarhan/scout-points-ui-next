@@ -23,6 +23,8 @@ interface EditBlogModuleProps {
 }
 
 const EditBlogModule: FC<EditBlogModuleProps> = ({ categories, blog }) => {
+    console.log('blog', blog);
+    
     const { token } = useUserContext()
     const { update } = useBlogs({ token })
 
@@ -36,13 +38,11 @@ const EditBlogModule: FC<EditBlogModuleProps> = ({ categories, blog }) => {
 
     useEffect(() => {
         form.reset({
-            // categories: blogCategories,
-            // title: blog.title,
-            // rating: blog.rating,
-            // content: blog.content,
-            // coverImage: blog.coverImage,
-            // featuredImage: blog.featuredImage,
-            // author: blog.author._id,
+            categories: blogCategories,
+            title: blog.title,
+            rating: blog.rating,
+            content: blog.content,
+            author: blog.author._id,
         })
     }, [blog])
 
@@ -51,7 +51,8 @@ const EditBlogModule: FC<EditBlogModuleProps> = ({ categories, blog }) => {
     type BlogData = z.infer<typeof blogSchema>;
 
     const onSubmit = async (data: BlogData) => {
-
+        console.log('data', data);
+        
         update(blog._id, data).then(() => {
             toast.success("Blog updated successfully!")
         }).catch((e) => {
@@ -80,7 +81,7 @@ const EditBlogModule: FC<EditBlogModuleProps> = ({ categories, blog }) => {
                                 <div className='relative h-fit'>
                                     <h3 className='text-3xl mb-2'>Content</h3>
                                     <RichEditor
-                                        text={''}
+                                        text={blog.content}
                                         onValueChange={handleEditorValue} />
                                 </div>
                                 <Button className='mt-10' type='submit'>Update</Button>

@@ -62,7 +62,7 @@ const AddBlogModule: FC<AddBlogModuleProps> = ({ categories }) => {
                                     name="title"
                                     placeholder="Enter blog title"
                                 />
-                                <div className='relative h-fit'>
+                                <div className='relative '>
                                     <h3 className='text-3xl mb-2'>Content</h3>
                                     <RichEditor
                                         onValueChange={handleEditorValue} />

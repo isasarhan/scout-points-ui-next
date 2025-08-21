@@ -11,7 +11,7 @@ export const generateSidebar = (pathName: string) => {
                         isActive: pathName === "/admin/users"
                     },
                     {
-                        title: "Add New User",
+                        title: "New User",
                         url: "/admin/users/add",
                         isActive: pathName === "/admin/users/add"
                     },
@@ -28,7 +28,7 @@ export const generateSidebar = (pathName: string) => {
                         isActive: pathName === "/admin/blogs"
                     },
                     {
-                        title: "Add New User",
+                        title: "New Blog",
                         url: "/admin/blogs/add",
                         isActive: pathName === "/admin/blogs/add"
                     },
@@ -45,7 +45,7 @@ export const generateSidebar = (pathName: string) => {
                         isActive: pathName === "/admin/events"
                     },
                     {
-                        title: "Add New Event",
+                        title: "New Event",
                         url: "/admin/events/add",
                         isActive: pathName === "/admin/events/add"
                     },
@@ -66,7 +66,7 @@ export const generateSidebar = (pathName: string) => {
                         isActive: pathName === "/admin/departments"
                     },
                     {
-                        title: "Add New Department",
+                        title: "New Department",
                         url: "/admin/departments/add",
                         isActive: pathName === "/admin/departments/add"
                     },
@@ -82,7 +82,7 @@ export const generateSidebar = (pathName: string) => {
                         isActive: pathName === "/admin/associations"
                     },
                     {
-                        title: "Add New Associations",
+                        title: "New Associations",
                         url: "/admin/associations/add",
                         isActive: pathName === "/admin/associations/add"
                     },
@@ -98,7 +98,7 @@ export const generateSidebar = (pathName: string) => {
                         isActive: pathName === "/admin/achievements"
                     },
                     {
-                        title: "Add New Achievement",
+                        title: "New Achievement",
                         url: "/admin/achievements/add",
                         isActive: pathName === "/admin/achievements/add"
                     },
