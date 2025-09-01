@@ -7,7 +7,7 @@ export const blogSchema = z.object({
   author: z.string().optional(),
   coverImage: z.any().optional(),
   featuredImage: z.any().optional(),
-  categories: z.array(z.string().optional()).optional(),
+  categories: z.array(z.string()).optional(),
   enabled: z.boolean().default(true),
 
 });

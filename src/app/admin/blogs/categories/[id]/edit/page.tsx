@@ -1,7 +1,7 @@
 import Title from '@/components/common/title';
+import { getAuth } from '@/lib/auth';
 import EditCategoryModule from '@/modules/admin/blogs/categories/edit-category';
-import { fetchBlogCategories, fetchBlogCategory } from '@/services/blogs';
-import { fetchProductCategory } from '@/services/products';
+import useBlogCategories from '@/services/blogs/categories';
 import type { FC } from 'react';
 
 interface EditCategoryProps {
@@ -10,14 +10,15 @@ interface EditCategoryProps {
 
 const EditCategory: FC<EditCategoryProps> = async ({ params }) => {
     const { id } = await params
+    const { token } = await getAuth()
+    const { getBlogCategoriesById } = useBlogCategories({ token })
 
-    const category = await fetchBlogCategory(id)
-    console.log('category', category);
-    
+    const category = await getBlogCategoriesById(id)
+
     return (
         <>
             <Title text='Edit Product Category' goBack />
-            <EditCategoryModule category={category}/>
+            <EditCategoryModule category={category} />
         </>
     );
 }

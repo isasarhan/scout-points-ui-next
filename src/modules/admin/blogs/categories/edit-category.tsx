@@ -1,5 +1,4 @@
 'use client'
-import { IProductCategory } from '@/types/product';
 import { useEffect, type FC } from 'react';
 import FormInput from '@/components/common/form/input';
 import FormTextArea from '@/components/common/form/textarea';
@@ -7,21 +6,22 @@ import FileUploader from '@/components/common/file-uploader';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Form } from '@/components/ui/form';
-import { useMutation } from '@apollo/client';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { toast } from 'sonner';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { blogCategorySchema } from '../validation';
-import { UPDATE_BLOG_CATEGORIES } from '@/gql/blog-category';
+import { IBlogCategory } from '@/types/blogs';
+import useBlogCategories from '@/services/blogs/categories';
+import { useUserContext } from '@/providers/UserProvider';
 
 interface EditCategoryModuleProps {
-    category: IProductCategory
+    category: IBlogCategory
 }
 
 const EditCategoryModule: FC<EditCategoryModuleProps> = ({ category }) => {
-    const [update] = useMutation(UPDATE_BLOG_CATEGORIES)
-
+    const { token } = useUserContext()
+    const { update } = useBlogCategories({ token })
     const form = useForm({
         mode: "onBlur",
         resolver: zodResolver(blogCategorySchema),
@@ -37,13 +37,8 @@ const EditCategoryModule: FC<EditCategoryModuleProps> = ({ category }) => {
         })
     }, [category])
 
-    const onSubmit = async (data: CategoryData) => {        
-        update({
-            variables: {
-                id: category._id,
-                ...data
-            }
-        }).then(() => {
+    const onSubmit = async (data: CategoryData) => {
+        update(category._id!, data).then(() => {
             toast("category updated successfully!")
         }).catch((e) => {
             toast.error(e.message)

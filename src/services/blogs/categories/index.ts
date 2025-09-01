@@ -6,7 +6,7 @@ import { IBlogCategory } from '@/types/blogs';
 const useBlogCategories = ({ token }: { token: string | undefined }) => {
     const instance = httpService.instance
     const url = `/blog-categories`;
-    
+
     const getAllBlogCategories = async () => {
         if (!token) return
         return httpService.assignToken(token) ? await instance.get(`${url}`).then((res) => {
@@ -43,7 +43,28 @@ const useBlogCategories = ({ token }: { token: string | undefined }) => {
             throw new Error(errorMessage);
         }
     };
+    const update = async (id: string, user: Partial<IBlogCategory>) => {
+        if (!token) return;
 
+        if (!httpService.assignToken(token)) return null;
+
+        try {
+            const res = await instance.put(`${url}/${id}`, user);
+            return res.data;
+        } catch (error) {
+            console.error("Error adding user:", error);
+
+            let errorMessage = "An unexpected error occurred";
+
+            if (axios.isAxiosError(error)) {
+                errorMessage = error.response?.data?.message || error.message || errorMessage;
+            } else if (error instanceof Error) {
+                errorMessage = error.message;
+            }
+
+            throw new Error(errorMessage);
+        }
+    };
     const remove = async (id: string) => {
         if (!token) return;
 
@@ -58,7 +79,7 @@ const useBlogCategories = ({ token }: { token: string | undefined }) => {
         }
     }
 
-    return { getBlogCategoriesById, getAllBlogCategories, addBlogCategories , remove};
+    return { getBlogCategoriesById, getAllBlogCategories, addBlogCategories, remove, update };
 }
 
 export default useBlogCategories;
