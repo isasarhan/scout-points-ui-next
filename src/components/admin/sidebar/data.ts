@@ -2,6 +2,10 @@ export const generateSidebar = (pathName: string) => {
     return {
         navMain: [
             {
+                title: "Home",
+                url: "/",
+            },
+            {
                 title: "Users",
                 url: "#",
                 items: [
