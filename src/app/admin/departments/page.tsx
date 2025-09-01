@@ -1,3 +1,4 @@
+import Title from '@/components/common/title';
 import NotFound from '@/components/not-found';
 import { getAuth } from '@/lib/auth';
 import AllDepartmentsModule from '@/modules/admin/departments';
@@ -13,7 +14,7 @@ const DepartmentsPage: FC<DepartmentsPageProps> = async () => {
 
     const { getAll } = useDepartments({ token: token })
     const data = await getAll();
-    
+
     if (data.length === 0) {
         return (
             <NotFound
@@ -22,7 +23,10 @@ const DepartmentsPage: FC<DepartmentsPageProps> = async () => {
         )
     }
     return (
-        <AllDepartmentsModule departments={data} />
+        <>
+            <Title text='Departments' buttonText='Add Department' url='/admin/departments/add' />
+            <AllDepartmentsModule departments={data} />
+        </>
     );
 };
 

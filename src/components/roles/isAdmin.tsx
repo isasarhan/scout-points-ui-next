@@ -8,7 +8,6 @@ export interface IsAdminProps {
 
 const IsAdmin: FC<IsAdminProps> = ({ children }) => {
     const { user } = useUserContext()
-    console.log('user', user);
     
     if (user?.role === Role.ADMIN)
         return <>{children}</>

@@ -1,11 +1,11 @@
 import { IUser } from "./user"
 
 export interface IBlogCategory {
-    _id: string;
+    _id?: string;
     name: string;
-    slug: string;
-    img: string;
-    description: string;
+    slug?: string;
+    img?: string;
+    description?: string;
 }
 
 export interface IBlog {

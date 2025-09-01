@@ -5,7 +5,9 @@ export const blogSchema = z.object({
   content: z.string().optional(),
   rating: z.coerce.number().min(1).max(5).default(1).optional(),
   author: z.string().optional(),
-  categories: z.array(z.string()).optional(),
+  coverImage: z.any().optional(),
+  featuredImage: z.any().optional(),
+  categories: z.array(z.string().optional()).optional(),
   enabled: z.boolean().default(true),
 
 });

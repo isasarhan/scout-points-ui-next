@@ -1,12 +1,15 @@
 import Title from '@/components/common/title';
+import { getAuth } from '@/lib/auth';
 import BlogCategoriesModule from '@/modules/admin/blogs/categories';
-import { fetchBlogCategories } from '@/services/blogs';
+import useBlogCategories from '@/services/blogs/categories';
 import type { FC } from 'react';
 
 interface AdminBlogsPropsCategories { }
 
 const AdminBlogsCategories: FC<AdminBlogsPropsCategories> = async () => {
-    const categories = await fetchBlogCategories()
+    const { token } = await getAuth()
+    const { getAllBlogCategories } = useBlogCategories({ token })
+    const categories = await getAllBlogCategories()
 
     return (
         <>

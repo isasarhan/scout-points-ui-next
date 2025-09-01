@@ -44,16 +44,37 @@ const useBlogs = ({ token }: { token: string | undefined }) => {
 
     };
 
-    const update = async (id: string, user: Partial<IAddBlog>) => {
+    const update = async (id: string, user: Partial<IAddBlog> & { coverImage?: File, featuredImage?: File  }) => {
         if (!token) return;
 
         if (!httpService.assignToken(token)) return null;
 
         try {
-            const res = await instance.put(`${url}/${id}`, user);
+            const formData = new FormData();
+
+            Object.entries(user).forEach(([key, value]) => {
+                if (value !== undefined && key !== "coverImage") {
+                    formData.append(key, value as any);
+                }
+            });
+
+            if (user.coverImage) {
+                formData.append("coverImage", user.coverImage);
+            }
+
+            // if (user.featuredImage) {
+            //     formData.append("featuredImage", user.featuredImage);
+            // }
+
+            const res = await instance.put(`${url}/${id}`, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            });
+
             return res.data;
         } catch (error) {
-            console.error("Error adding user:", error);
+            console.error("Error updating blog:", error);
 
             let errorMessage = "An unexpected error occurred";
 
@@ -65,8 +86,8 @@ const useBlogs = ({ token }: { token: string | undefined }) => {
 
             throw new Error(errorMessage);
         }
-    }
-        const remove = async (id: string) => {
+    };
+    const remove = async (id: string) => {
         if (!token) return;
 
         if (!httpService.assignToken(token)) return null;

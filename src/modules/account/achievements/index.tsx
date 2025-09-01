@@ -76,7 +76,7 @@ const AchievementsModule: FC<AchievementsModuleProps> = ({ achievemnts, categori
     useEffect(() => {
         filterAchievementList()
     }, [activeTab])
-
+    
     const handleRequestAchievement = async (id: string) => {
         await add({ achievement: id, user: user?._id!, status: Status.Pending }).then(() => {
             toast.success("Achievement Added!")

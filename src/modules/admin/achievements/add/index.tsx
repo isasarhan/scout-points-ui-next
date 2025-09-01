@@ -61,16 +61,16 @@ const AddAchievementModule: FC<AddAchievementModuleProps> = ({ departments, cate
     }
 
     return (
-        <Card>
-            <CardHeader>
+        <div>
+            {/* <CardHeader>
                 <CardTitle className="text-2xl font-bold">Add Achievement</CardTitle>
                 <CardDescription>
                     Fill in the details to create a new achievement
                 </CardDescription>
-            </CardHeader>
+            </CardHeader> */}
             <Form {...form}>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <CardContent className="space-y-4">
+                    <div className="space-y-4">
                         <div className="flex items-center w-full gap-4">
                             <FormInput
                                 control={form.control}
@@ -158,15 +158,13 @@ const AddAchievementModule: FC<AddAchievementModuleProps> = ({ departments, cate
                             />
 
                         </div>
-                    </CardContent>
-                    <CardFooter>
+                    </div>
                         <Button type="submit" className='px-9 '>
                             Add
                         </Button>
-                    </CardFooter>
                 </form>
             </Form>
-        </Card>
+        </div>
     );
 };
 

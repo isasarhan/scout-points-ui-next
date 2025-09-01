@@ -1,3 +1,4 @@
+import Title from '@/components/common/title';
 import { getAuth } from '@/lib/auth';
 import AddAchievementModule from '@/modules/admin/achievements/add';
 import useAchievementCategory from '@/services/achievements/categories';
@@ -15,9 +16,12 @@ const AddAchievementPage: FC<AddAchievementPageProps> = async () => {
   const { getAll: getAllCategories } = useAchievementCategory({ token: token })
 
   const [departments, categories] = await Promise.all([getAllDedpartments(), getAllCategories()])
-  
+
   return (
-    <AddAchievementModule departments={departments} categories={categories} />
+    <>
+      <Title text='Add Achievement' goBack />
+      <AddAchievementModule departments={departments} categories={categories} />
+    </>
   );
 };
 

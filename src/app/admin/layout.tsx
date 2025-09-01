@@ -32,7 +32,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                 <BreadcrumbList>
                   <BreadcrumbItem className="hidden md:block">
                     <BreadcrumbLink href="#">
-                      <Link href={'/'}>Home</Link>
+                      Home
                     </BreadcrumbLink>
                   </BreadcrumbItem>
                   <BreadcrumbSeparator className="hidden md:block" />

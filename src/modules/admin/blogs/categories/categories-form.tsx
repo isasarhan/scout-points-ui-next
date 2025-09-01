@@ -5,7 +5,6 @@ import FileUploader from '@/components/common/file-uploader';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Form } from '@/components/ui/form';
-import { useMutation } from '@apollo/client';
 import type { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -13,12 +12,14 @@ import { toast } from 'sonner';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { blogCategorySchema } from '../validation';
-import { CREATE_BLOG_CATEGORY } from '@/gql/blog-category';
+import useBlogCategories from '@/services/blogs/categories';
+import { useUserContext } from '@/providers/UserProvider';
 
 interface AddCategoriesFormProps { }
 
 const AddCategoriesForm: FC<AddCategoriesFormProps> = () => {
-    const [add] = useMutation(CREATE_BLOG_CATEGORY)
+    const { token } = useUserContext()
+    const {addBlogCategories} = useBlogCategories({token})
     const router = useRouter()
 
     const form = useForm({
@@ -29,9 +30,7 @@ const AddCategoriesForm: FC<AddCategoriesFormProps> = () => {
     type CategoryData = z.infer<typeof blogCategorySchema>;
 
     const onSubmit = async (data: CategoryData) => {
-        add({
-            variables: data
-        }).then(() => {
+        addBlogCategories(data).then(() => {
             toast("category added successfully!")
             router.refresh()
         }).catch((e) => {

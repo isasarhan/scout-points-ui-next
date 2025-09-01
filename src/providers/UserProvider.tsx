@@ -40,11 +40,12 @@ const UserProvider: FC<UserProviderProps> = ({ children }) => {
     const signIn = async (email: string, password: string) => {
         return await login(email, password ).then((data) => {
             toast.success("Logged In Successfully")            
-            const { token, user, account } = data
-            setUser({...user, ...account})
+            const { token, user } = data
+            
+            setUser({...user, })
             setToken(token)
             Cookies.set('token', token)
-            Cookies.set('currentUser', JSON.stringify({...user, ...account}))
+            Cookies.set('currentUser', JSON.stringify({...user}))
             router.push('/admin')
             return data
         }).catch((e)=>{
@@ -64,8 +65,10 @@ const UserProvider: FC<UserProviderProps> = ({ children }) => {
     useEffect(() => {
         const retreiveUserInfo = () => {
             const storedUser = Cookies.get("currentUser")
+            
             const storedToken = Cookies.get('token')
             if (storedUser && storedToken) {
+                console.log('storedUser', JSON.parse(storedUser));
                 const parsedUser = JSON.parse(storedUser);
                 setIsLoggedIn(true)
                 setUser(parsedUser)

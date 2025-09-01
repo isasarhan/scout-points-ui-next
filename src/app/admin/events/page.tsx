@@ -1,3 +1,4 @@
+import Title from '@/components/common/title';
 import NotFound from '@/components/not-found';
 import { getAuth } from '@/lib/auth';
 import EventsModule from '@/modules/admin/events';
@@ -19,7 +20,10 @@ const EventsPage: FC<EventsPageProps> = async () => {
         )
     }
     return (
-        <EventsModule events={data} />
+        <>
+            <Title text='Events' buttonText='Add Event' url='/admin/events/add' />
+            <EventsModule events={data} />
+        </>
     );
 };
 

@@ -2,22 +2,23 @@ import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/comp
 import { Textarea } from '@/components/ui/textarea';
 import React, { FC } from 'react';
 import { Control } from 'react-hook-form';
-export interface FormTextAreaProps {
+
+export interface FormTextAreaProps extends React.ComponentProps<"textarea">{
     control: Control<any>
     name: string
-    title: string
-    placeholder: string
+    title?: string
+    placeholder?: string
 }
-const FormTextArea: FC<FormTextAreaProps> = ({ control, name, title, placeholder }) => {
+const FormTextArea: FC<FormTextAreaProps> = ({ control, name, title, placeholder, ...props }) => {
     return (
         <FormField
-            control={control}
-            name={name}
+        control={control}
+        name={name}
             render={({ field }) => (
-                <FormItem className="flex-1">
+                <FormItem>
                     <FormLabel>{title}</FormLabel>
                     <FormControl>
-                        <Textarea rows={3} placeholder="Enter description (optional)" {...field} />
+                        <Textarea placeholder={placeholder} className="resize-none min-h-[80px]" {...field} {...props}/>
                     </FormControl>
                     <FormMessage />
                 </FormItem>

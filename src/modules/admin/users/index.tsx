@@ -42,9 +42,7 @@ const UsersModule: FC<UsersModuleProps> = ({ users = [] }) => {
         else setFilteredUsers(users.filter((user) => user.rank === rank))
     }
 
-    const handleChangePublicity = async (user: IUser) => {
-        console.log('user._id', user._id);
-        
+    const handleChangePublicity = async (user: IUser) => {        
         await update(user._id!, { isApproved: !user.isApproved }).then(() => {
             router.refresh()
             toast.success('updated!')

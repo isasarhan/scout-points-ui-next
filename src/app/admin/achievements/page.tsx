@@ -1,16 +1,17 @@
+import Title from '@/components/common/title';
 import NotFound from '@/components/not-found';
 import { getAuth } from '@/lib/auth';
 import AchievementsModule from '@/modules/admin/achievements';
 import useAchievements from '@/services/achievements';
 import React, { FC } from 'react';
 
-export interface AchievementsPageProps {}
+export interface AchievementsPageProps { }
 
 const AchievementsPage: FC<AchievementsPageProps> = async () => {
-  const { token } = await getAuth();
+    const { token } = await getAuth();
 
-  const { getAll } = useAchievements({ token: token })
-  const data = await getAll();
+    const { getAll } = useAchievements({ token: token })
+    const data = await getAll();
 
     if (data.length === 0) {
         return (
@@ -20,7 +21,10 @@ const AchievementsPage: FC<AchievementsPageProps> = async () => {
         )
     }
     return (
-        <AchievementsModule achievements={data}/>
+        <>
+            <Title text='All Achievements' buttonText='Add Achievement' url='/admin/achievement/add' />
+            <AchievementsModule achievements={data} />
+        </>
     );
 
 };

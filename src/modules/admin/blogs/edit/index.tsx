@@ -22,9 +22,7 @@ interface EditBlogModuleProps {
     blog: IBlog
 }
 
-const EditBlogModule: FC<EditBlogModuleProps> = ({ categories, blog }) => {
-    console.log('blog', blog);
-    
+const EditBlogModule: FC<EditBlogModuleProps> = ({ categories, blog }) => {    
     const { token } = useUserContext()
     const { update } = useBlogs({ token })
 
@@ -33,10 +31,11 @@ const EditBlogModule: FC<EditBlogModuleProps> = ({ categories, blog }) => {
         mode: "onBlur",
         resolver: zodResolver(blogSchema),
     });
-
+    console.log('form', form.formState.errors);
+    
     const { handleSubmit, setValue } = form;
 
-    useEffect(() => {
+    useEffect(() => {        
         form.reset({
             categories: blogCategories,
             title: blog.title,
@@ -46,6 +45,7 @@ const EditBlogModule: FC<EditBlogModuleProps> = ({ categories, blog }) => {
         })
     }, [blog])
 
+    console.log('blog', blog);
 
 
     type BlogData = z.infer<typeof blogSchema>;
